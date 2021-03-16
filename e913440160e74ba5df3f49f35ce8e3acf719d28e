@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73fd6d2b_9e4b2b85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-03-16T00:32:35Z",
+      "side": 1,
+      "message": "This is just the initial skeleton with the Bazel build and the necessary dependencies for Kinesis.",
+      "revId": "e913440160e74ba5df3f49f35ce8e3acf719d28e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
