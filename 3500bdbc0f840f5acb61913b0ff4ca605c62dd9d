@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "633d3334_035070b7",
+        "filename": "external_plugin_deps.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-03-16T21:08:50Z",
+      "side": 1,
+      "message": "Gerrit already has:\n- jackson-core: 2.11.3\n- jackson-annotations: 2.10.3\n\nIncluding v2.12.2 *could* be a problem IMHO",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 22
+      },
+      "revId": "3500bdbc0f840f5acb61913b0ff4ca605c62dd9d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
