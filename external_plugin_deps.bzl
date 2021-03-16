@@ -114,7 +114,61 @@ def external_plugin_deps():
     )
 
     maven_jar(
+        name = "jackson-dataformat-cbor",
+        artifact = "com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:" + JACKSON_VER,
+        sha1 = "c854bb2d46138198cb5d4aae86ef6c04b8bc1e70",
+    )
+
+    maven_jar(
         name = "events-broker",
         artifact = "com.gerritforge:events-broker:3.4-alpha-20210205083200",
         sha1 = "3fec2bfee13b9b0a2889616e3c039ead686b931f",
+    )
+
+    maven_jar(
+        name = 'io-netty-all',
+        artifact = 'io.netty:netty-all:4.1.51.Final',
+        sha1 = '5e5f741acc4c211ac4572c31c7e5277ec465e4e4',
+    )
+
+    maven_jar(
+        name = 'awssdk-query-protocol',
+        artifact = 'software.amazon.awssdk:aws-query-protocol:' + AWS_SDK_VER,
+        sha1 = '4c88c66daa5039813e879b324636d15fa2802787',
+    )
+
+    maven_jar(
+        name = 'awssdk-protocol-core',
+        artifact = 'software.amazon.awssdk:protocol-core:' + AWS_SDK_VER,
+        sha1 = '6200c1617f87eed0216c6afab35bab2403da140c',
+    )
+
+    maven_jar(
+        name = 'awssdk-json-protocol',
+        artifact = 'software.amazon.awssdk:aws-json-protocol:' + AWS_SDK_VER,
+        sha1 = '16449e555f61607b917dc7f242c1928298de9bdd',
+    )
+
+    maven_jar(
+        name = 'awssdk-cbor-protocol',
+        artifact = 'software.amazon.awssdk:aws-cbor-protocol:' + AWS_SDK_VER,
+        sha1 = '7353a868437576b9e4911779ae66a85ef6be0d9e',
+    )
+
+    maven_jar(
+        name = 'awssdk-metrics-spi',
+        artifact = 'software.amazon.awssdk:metrics-spi:' + AWS_SDK_VER,
+        sha1 = 'd8669974b412766751b5eaf9c1edad908bfe5c38',
+    )
+
+    maven_jar(
+        name = 'amazon-profiles',
+        artifact = 'software.amazon.awssdk:profiles:' + AWS_SDK_VER,
+        sha1 = '5add2a843de43bd0acf45e1ab8c2b94c3638dd66',
+    )
+
+    maven_jar(
+        name = 'apache-commons-lang3',
+        artifact = 'org.apache.commons:commons-lang3:3.12.0',
+        sha1 = 'c6842c86792ff03b9f1d1fe2aab8dc23aa6c6f0e',
     )
