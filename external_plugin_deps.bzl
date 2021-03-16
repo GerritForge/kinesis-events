@@ -1,8 +1,8 @@
 load("//tools/bzl:maven_jar.bzl", "maven_jar")
 
-AWS_SDK_VER = "2.15.14"
-AWS_KINESIS_VER = "2.2.9"
-JACKSON_VER = "2.10.4"
+AWS_SDK_VER = "2.16.19"
+AWS_KINESIS_VER = "2.3.4"
+JACKSON_VER = "2.12.2"
 
 def external_plugin_deps():
     maven_jar(
@@ -14,67 +14,67 @@ def external_plugin_deps():
     maven_jar(
         name = "amazon-kinesis-client",
         artifact = "software.amazon.kinesis:amazon-kinesis-client:" + AWS_KINESIS_VER,
-        sha1 = "da8b162cf62c2a752db22ba55ff1934cc3b7a6b5",
+        sha1 = "6bb6fcbc5a0f6fd6085f3b1589e738485b0b7867",
     )
 
     maven_jar(
         name = "amazon-kinesis",
         artifact = "software.amazon.awssdk:kinesis:" + AWS_SDK_VER,
-        sha1 = "95242b05989de81b5d0310b17fc81eed89b2d756",
+        sha1 = "bec13fc5ef9225d1a10f13fbe1de8cb114448cf8",
     )
 
     maven_jar(
         name = "amazon-dynamodb",
         artifact = "software.amazon.awssdk:dynamodb:" + AWS_SDK_VER,
-        sha1 = "2349672017eabc6deb0d5a526d964ec433cb38ef",
+        sha1 = "33ec7d291973658779b5777db2a0214a5c469e81",
     )
 
     maven_jar(
         name = "amazon-cloudwatch",
         artifact = "software.amazon.awssdk:cloudwatch:" + AWS_SDK_VER,
-        sha1 = "388467d5361709b20462b20fd4165d2b356e7110",
+        sha1 = "7585fbe349a92e0a9f040e4194ac89ca32e7983d",
     )
 
     maven_jar(
         name = "amazon-regions",
         artifact = "software.amazon.awssdk:regions:" + AWS_SDK_VER,
-        sha1 = "ea4c72b80f4cf2f5024e156cd291d9c4cd854bc7",
+        sha1 = "089f4f3d3ef20b2486f09e71da638c03100eab64",
     )
 
     maven_jar(
         name = "amazon-netty-nio-client",
         artifact = "software.amazon.awssdk:netty-nio-client:" + AWS_SDK_VER,
-        sha1 = "7c937604636d7cfe38d2c40c5544d81a1c50b97a",
+        sha1 = "bb674feda8417513a647c7aa8cba9a537068d099",
     )
 
     maven_jar(
         name = "amazon-utils",
         artifact = "software.amazon.awssdk:utils:" + AWS_SDK_VER,
-        sha1 = "aa8c6e723a8feb964dabd6eda7c3157e1f89a53d",
+        sha1 = "53edaa1f884682ac3091293eff3eb024ed0e36bb",
     )
 
     maven_jar(
         name = "amazon-sdk-core",
         artifact = "software.amazon.awssdk:sdk-core:" + AWS_SDK_VER,
-        sha1 = "8b595e49b1e219a4125cf69ef5a8febf60888640",
+        sha1 = "02a60fd9c138048272ef8b6c80ae67491dd386a9",
     )
 
     maven_jar(
         name = "amazon-aws-core",
         artifact = "software.amazon.awssdk:aws-core:" + AWS_SDK_VER,
-        sha1 = "cb3c121445a45b37e79b60de97c61fcf331fdeb8",
+        sha1 = "0f50f5cf2698a0de7d2d77322cbf3fb13f76187f",
     )
 
     maven_jar(
         name = "amazon-http-client-spi",
         artifact = "software.amazon.awssdk:http-client-spi:" + AWS_SDK_VER,
-        sha1 = "a662919f86cce54ca7e235476ab13893ef9d4d34",
+        sha1 = "e4027e7e0cb064602100b34e19f131983f76f872",
     )
 
     maven_jar(
         name = "amazon-auth",
         artifact = "software.amazon.awssdk:auth:" + AWS_SDK_VER,
-        sha1 = "649aa29b6588496efda6ca368f4e3a9f193ba6fb",
+        sha1 = "4163754b2a0eadcb569a35f0666fd5d859e43ef8",
     )
 
     maven_jar(
@@ -110,7 +110,7 @@ def external_plugin_deps():
     maven_jar(
         name = "jackson-databind",
         artifact = "com.fasterxml.jackson.core:jackson-databind:" + JACKSON_VER,
-        sha1 = "76e9152e93d4cf052f93a64596f633ba5b1c8ed9",
+        sha1 = "5f9d79e09ebf5d54a46e9f4543924cf7ae7654e0",
     )
 
     maven_jar(
