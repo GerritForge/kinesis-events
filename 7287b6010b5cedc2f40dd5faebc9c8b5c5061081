@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02ee0256_29e0844b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-03-17T20:33:13Z",
+      "side": 1,
+      "message": "Do we need that for kinesis? This code was added as a workaround for some issue in Kafka consumer",
+      "range": {
+        "startLine": 93,
+        "startChar": 5,
+        "endLine": 93,
+        "endChar": 91
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0a8889c_8f9febbc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
         "patchSetId": 3
