@@ -22,6 +22,30 @@
       },
       "revId": "3500bdbc0f840f5acb61913b0ff4ca605c62dd9d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab5c252d_b5dd6ce3",
+        "filename": "external_plugin_deps.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-17T20:18:56Z",
+      "side": 1,
+      "message": "I see, I have reverted the jackson bump up.\nWe can test different versions separately to see if they create any problem.",
+      "parentUuid": "633d3334_035070b7",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 22
+      },
+      "revId": "3500bdbc0f840f5acb61913b0ff4ca605c62dd9d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
