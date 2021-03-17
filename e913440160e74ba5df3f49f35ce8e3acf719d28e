@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8954085e_01c160a9",
+        "filename": "BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-17T13:50:12Z",
+      "side": 1,
+      "message": "From what I understand it is possible to produce messages without using KPL directly.\nThis official example does just that[1] by simply using kinesisClient.\n\nSo we should be good without KPL.\n\n\n[1]https://docs.aws.amazon.com/streams/latest/dev/kcl2-standard-consumer-java-example.html",
+      "parentUuid": "5d9105f2_877e07cf",
+      "revId": "e913440160e74ba5df3f49f35ce8e3acf719d28e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86087878_02ae4017",
