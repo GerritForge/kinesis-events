@@ -96,18 +96,6 @@ def external_plugin_deps():
     )
 
     maven_jar(
-        name = "jackson-core",
-        artifact = "com.fasterxml.jackson.core:jackson-core:" + JACKSON_VER,
-        sha1 = "8b02908d53183fdf9758e7e20f2fdee87613a962",
-    )
-
-    maven_jar(
-        name = "jackson-annotations",
-        artifact = "com.fasterxml.jackson.core:jackson-annotations:" + JACKSON_VER,
-        sha1 = "f083c4ac0fb8b3c6b8d5b62cd54122228ef62cee",
-    )
-
-    maven_jar(
         name = "jackson-databind",
         artifact = "com.fasterxml.jackson.core:jackson-databind:" + JACKSON_VER,
         sha1 = "76e9152e93d4cf052f93a64596f633ba5b1c8ed9",
