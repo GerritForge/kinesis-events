@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "407b33a0_ef481a58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-18T18:50:37Z",
+      "side": 1,
+      "message": "I have made some improvements, but e2e tests with localstack shows that the consumer is not getting messages I don\u0027t understand why, I need to look more into this:\n\nIf you guys want to try, this is what\u0027s needed\n\nTo run localstack:\ndocker run --rm -p 4566:4566 -p 4571:4571 -e\"SERVICES\u003ddynamodb,cloudwatch,kinesis\" -e\u0027AWS_REGION\u003dus-east-1\u0027 localstack/localstack:latest\n\nTo install the awslocal util:\npip install awscli-local\n\nTo create streams:\n\nfor i in gerrit_batch_index gerrit_cache_eviction gerrit_index gerrit_list_project gerrit_stream gerrit_web_session gerrit; do echo \"Create stream $i\"; awslocal kinesis create-stream --shard-count 1 --stream-name $i ;done;\n\nTo configure gerrit:\n\n[plugin \"kinesis-events\"]\n    numberOfSubscribers \u003d 6\n    pollingIntervalMs \u003d 1000\n    region \u003d us-east-1\n    endpoint \u003d http://localhost:4566\n    applicationName \u003d gerrit-1 # gerrit-2 for the other node\n",
+      "revId": "197026f1865d651daa62d374dc1b5597a82863bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
