@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f4b935b_6a322094",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-18T08:20:34Z",
+      "side": 1,
+      "message": "I thought this was a generic issue with (de)serialization of classes defined in different plugins?\nWas this just kafka specific?",
+      "parentUuid": "02ee0256_29e0844b",
+      "range": {
+        "startLine": 93,
+        "startChar": 5,
+        "endLine": 93,
+        "endChar": 91
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0a8889c_8f9febbc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
         "patchSetId": 3
@@ -71,6 +95,30 @@
       "writtenOn": "2021-03-17T20:31:13Z",
       "side": 1,
       "message": "Sorry in my previous comment I missed the fact that this publisher is used in broker api as well. What I meant is that we do not need to implement EventListener",
+      "range": {
+        "startLine": 29,
+        "startChar": 41,
+        "endLine": 29,
+        "endChar": 54
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2384ac0e_8e830973",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-18T08:20:34Z",
+      "side": 1,
+      "message": "oh, don\u0027t we need that for publishing stream events?",
+      "parentUuid": "25bab11c_33d2c54a",
       "range": {
         "startLine": 29,
         "startChar": 41,
