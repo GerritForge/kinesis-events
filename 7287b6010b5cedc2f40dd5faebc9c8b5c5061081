@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f89e2b1b_2b3eda7f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisApiModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "I don\u0027t remember the rationale behind this, can you remind me?\nIs this needed to replace the bindings registered by the noop implementation?",
+      "parentUuid": "e96311ff_547294a7",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 26
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe9fc32d_b920b481",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisBrokerApi.java",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2021-03-18T16:42:05Z",
       "side": 1,
       "message": "Does this need to be public?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 6
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7c85d0a_2be97e65",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisBrokerApi.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe9fc32d_b920b481",
       "range": {
         "startLine": 28,
         "startChar": 0,
@@ -77,6 +125,24 @@
       "writtenOn": "2021-03-18T16:42:05Z",
       "side": 1,
       "message": "nit: empty line",
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58b895fb_16467bdb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisBrokerApi.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bd9bab5_8bc803de",
       "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -150,6 +216,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad46d56_1a3a6e55",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "This is the name assigned to the worker spawn by the coordinator.\nI have given a more meaningful name.",
+      "parentUuid": "0ee751a0_eb510666",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 36
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00e4c102_dde6f8b0",
@@ -173,6 +263,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79f619d8_456073dd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00e4c102_dde6f8b0",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 6
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05e9c59f_816710f6",
@@ -186,6 +300,30 @@
       "writtenOn": "2021-03-18T16:42:05Z",
       "side": 1,
       "message": "We typically put:\n- all privates fields\n- all protected fields\n- all public fields",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb173e17_db6fccaf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "05e9c59f_816710f6",
       "range": {
         "startLine": 54,
         "startChar": 2,
@@ -267,6 +405,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70e34941_47870054",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8731d61_3c874015",
+      "range": {
+        "startLine": 93,
+        "startChar": 5,
+        "endLine": 93,
+        "endChar": 91
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcd23fe6_419ce6c8",
@@ -280,6 +442,30 @@
       "writtenOn": "2021-03-18T16:42:05Z",
       "side": 1,
       "message": "Why not simply catching Exception e and display its message?",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 5
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec6a1c11_df9ef8d0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcd23fe6_419ce6c8",
       "range": {
         "startLine": 114,
         "startChar": 0,
@@ -313,6 +499,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3548da75_71ac212f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ca99d9d_cc4a3edc",
+      "range": {
+        "startLine": 136,
+        "startChar": 26,
+        "endLine": 136,
+        "endChar": 44
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff894179_00638552",
@@ -330,6 +540,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd34e0a2_57121220",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff894179_00638552",
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dda8d0f5_66fdfd6e",
@@ -343,6 +571,30 @@
       "writtenOn": "2021-03-18T16:42:05Z",
       "side": 1,
       "message": "This pattern could be generalised, so that we don\u0027t have to remove it in each method.",
+      "range": {
+        "startLine": 186,
+        "startChar": 6,
+        "endLine": 192,
+        "endChar": 7
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c0d8761_3b5a4043",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "I have removed this, it was coming from an AWS tutorial.",
+      "parentUuid": "dda8d0f5_66fdfd6e",
       "range": {
         "startLine": 186,
         "startChar": 6,
@@ -376,6 +628,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df716388_f41a7b21",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27c308fd_67990579",
+      "range": {
+        "startLine": 211,
+        "startChar": 25,
+        "endLine": 211,
+        "endChar": 40
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8adf5071_5080da4e",
@@ -399,6 +675,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f65e4225_327409d6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8adf5071_5080da4e",
+      "range": {
+        "startLine": 216,
+        "startChar": 8,
+        "endLine": 216,
+        "endChar": 37
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0a8889c_8f9febbc",
@@ -412,6 +712,24 @@
       "writtenOn": "2021-03-17T20:26:10Z",
       "side": 1,
       "message": "I\u0027m not sure if we need that. In kafka plugin we have it because we built on top of existing plugin and we had to keep the original code.",
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37037754_32c1256a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0a8889c_8f9febbc",
       "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -558,6 +876,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8677c38a_96a606c6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04bd3bf6_21b4a03a",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 6
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3046fb1_c5ff63b7",
@@ -599,6 +941,54 @@
         "startChar": 0,
         "endLine": 25,
         "endChar": 6
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d47321_2520ef37",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/Manager.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe3495ea_20e2ff16",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 6
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16fa4d6a_55ad5efa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/Manager.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-20T15:45:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3046fb1_c5ff63b7",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 20
       },
       "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
