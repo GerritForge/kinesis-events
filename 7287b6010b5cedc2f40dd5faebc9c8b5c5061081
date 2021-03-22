@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da2bcc21_dbccb840",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisApiModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-03-22T05:55:50Z",
+      "side": 1,
+      "message": "As far as I remember we have this because consumers are passed by the plugin which is using this library. In our case multi-site. But we cannot guarantee which plugin will be loaded first. If kafka-events than it\u0027s fine because multi-site will register consumers with kafka. But if multi-site will be loaded first it will register clients with noop. That\u0027s why we have this code to register them with kafka again",
+      "parentUuid": "f89e2b1b_2b3eda7f",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 26
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe9fc32d_b920b481",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisBrokerApi.java",
         "patchSetId": 3
