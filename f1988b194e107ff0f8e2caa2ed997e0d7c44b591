@@ -48,6 +48,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d221416c_c317a5a4",
+        "filename": "external_plugin_deps.bzl",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-22T15:26:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6f9dbc82_5e486dd8",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 5
+      },
+      "revId": "f1988b194e107ff0f8e2caa2ed997e0d7c44b591",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "664587a4_04cecd86",
@@ -61,6 +85,24 @@
       "writtenOn": "2021-03-22T15:01:25Z",
       "side": 1,
       "message": "nit: empty line.",
+      "revId": "f1988b194e107ff0f8e2caa2ed997e0d7c44b591",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc1ce4df_664de2d5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/ConsumerExecutorProvider.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-22T15:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "664587a4_04cecd86",
       "revId": "f1988b194e107ff0f8e2caa2ed997e0d7c44b591",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

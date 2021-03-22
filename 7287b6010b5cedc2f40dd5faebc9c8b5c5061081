@@ -113,6 +113,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a09b76bd_93cf3ea8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisApiModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-22T15:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae293e0a_0dcec2a3",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 26
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe9fc32d_b920b481",
@@ -218,6 +242,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6be25ef_153f4e86",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisBrokerApi.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-22T15:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c4a16a5_c030f9ed",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e37f06c_ca3d3242",
@@ -231,6 +279,30 @@
       "writtenOn": "2021-03-18T16:42:05Z",
       "side": 1,
       "message": "Do we really want to define a default region? If yes, why us-east-2?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 59
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35de7bab_3baa9d13",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConfiguration.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-22T15:26:22Z",
+      "side": 1,
+      "message": "Actually we don\u0027t need to specify a default one.\nThe credentials chain provider will do the right thing:\nIt none is specified, it will default to the aws configuration or the EC2 rule.",
+      "parentUuid": "4e37f06c_ca3d3242",
       "range": {
         "startLine": 38,
         "startChar": 0,
