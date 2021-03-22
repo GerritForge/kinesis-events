@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae293e0a_0dcec2a3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisApiModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-22T08:47:10Z",
+      "side": 1,
+      "message": "Yep makes sense, thanks Marcin",
+      "parentUuid": "da2bcc21_dbccb840",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 26
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe9fc32d_b920b481",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisBrokerApi.java",
         "patchSetId": 3
