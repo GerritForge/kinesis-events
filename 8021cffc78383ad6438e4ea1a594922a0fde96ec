@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fae7cc4_3b2cd3c8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/Module.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-03-22T15:31:10Z",
+      "side": 1,
+      "message": "events-broker register the noop implementation https://github.com/GerritForge/events-broker/blob/master/src/main/java/com/gerritforge/gerrit/eventbroker/BrokerApiModule.java#L34",
+      "range": {
+        "startLine": 41,
+        "startChar": 20,
+        "endLine": 41,
+        "endChar": 69
+      },
+      "revId": "8021cffc78383ad6438e4ea1a594922a0fde96ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
