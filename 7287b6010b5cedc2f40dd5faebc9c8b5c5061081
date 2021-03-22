@@ -950,6 +950,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c04c4d8_5f32382b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-03-22T15:14:09Z",
+      "side": 1,
+      "message": "\u003e Hmm @Luca are you sure? Because I remember that we had a gerrit topic and we wonder why we must have it. We realised that it\u0027s because of the old code we had to maintain. \n\nYes, correct. The \"old\" code will never disappear because people rely on it for stream events and CI/CD integration. The \"new\" code producing the duplicate stream events will eventually disappear.\n\n\u003e By old code I mean code which was already in this repository when we moved kafka code to from the multi-site repo to kafka repo. In multi-site we have this code to handle stream events:\n\u003e https://gerrit.googlesource.com/plugins/multi-site/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/multisite/forwarder/broker/BrokerStreamEventForwarder.java#26\n\u003e \n\u003e and the topic name is GERRIT.EVENT.STREAM:\n\u003e \n\u003e https://gerrit.googlesource.com/plugins/multi-site/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/multisite/forwarder/events/EventTopic.java#24\n\nYep, that code can now be removed because we finally have the instance-id in the stream events (old code).",
+      "parentUuid": "6be865f3_da6c8517",
+      "range": {
+        "startLine": 29,
+        "startChar": 41,
+        "endLine": 29,
+        "endChar": 54
+      },
+      "revId": "7287b6010b5cedc2f40dd5faebc9c8b5c5061081",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3046fb1_c5ff63b7",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/Manager.java",
         "patchSetId": 3
