@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90003a7_0fe7153e",
+        "filename": "external_plugin_deps.bzl",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-22T08:51:49Z",
+      "side": 1,
+      "message": "@luca, @marcin: I guess we want kinesis-events to run on gerrit 3.3 right?\n\nIf so, should we not move it this change to stable-3.3 (and create the related branch)?\n\nevents-broker for stable-3.3 is:\n- https://search.maven.org/artifact/com.gerritforge/events-broker/3.3.1/jar\n\nevents-broker for master is:\n- https://search.maven.org/artifact/com.gerritforge/events-broker/3.4-alpha-20210205083200/jar\n\n\nWDYT?",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 5
+      },
+      "revId": "f1988b194e107ff0f8e2caa2ed997e0d7c44b591",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
