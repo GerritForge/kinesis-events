@@ -100,6 +100,27 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
     WaitUtil.waitUntil(() -> consumedMessages.size() > 0, WAIT_FOR_CONSUMPTION);
   }
 
+  @Test
+  @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
+  @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
+  public void shouldReplayMessages() throws Exception {
+    String streamName = UUID.randomUUID().toString();
+    createKinesisStream(streamName, STREAM_CREATION_TIMEOUT);
+
+    List<EventMessage> consumedMessages = new ArrayList<>();
+    kinesisBroker().receiveAsync(streamName, consumedMessages::add);
+
+    kinesisBroker().send(streamName, eventMessage());
+
+    WaitUtil.waitUntil(() -> consumedMessages.size() == 1, WAIT_FOR_CONSUMPTION);
+
+    kinesisBroker().disconnect();
+    kinesisBroker().receiveAsync(streamName, consumedMessages::add);
+    kinesisBroker().replayAllEvents(streamName);
+
+    WaitUtil.waitUntil(() -> consumedMessages.size() == 2, WAIT_FOR_CONSUMPTION);
+  }
+
   public KinesisBrokerApi kinesisBroker() {
     return (KinesisBrokerApi) plugin.getSysInjector().getInstance(BrokerApi.class);
   }
