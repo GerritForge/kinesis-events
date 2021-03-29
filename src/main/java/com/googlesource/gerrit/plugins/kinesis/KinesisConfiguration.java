@@ -111,6 +111,14 @@ class KinesisConfiguration {
     return kinesisClient;
   }
 
+  public DynamoDbAsyncClient getDynamoClient() {
+    return dynamoClient;
+  }
+
+  public String getApplicationName() {
+    return applicationName;
+  }
+
   public ConfigsBuilder createConfigBuilder(
       String streamName, ShardRecordProcessorFactory processorFactory) {
     return new ConfigsBuilder(
