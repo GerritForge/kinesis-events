@@ -43,6 +43,10 @@ import software.amazon.awssdk.services.kinesis.model.StreamStatus;
 
 @TestPlugin(name = "kinesis-events", sysModule = "com.googlesource.gerrit.plugins.kinesis.Module")
 public class KinesisEventsIT extends LightweightPluginDaemonTest {
+  // This timeout is quite high to allow the kinesis coordinator to acquire a
+  // lease on the newly created stream
+  private static final Duration WAIT_FOR_CONSUMPTION = Duration.ofSeconds(120);
+  private static final Duration STREAM_CREATION_TIMEOUT = Duration.ofSeconds(10);
 
   private static final int LOCALSTACK_PORT = 4566;
   private LocalStackContainer localstack =
@@ -86,10 +90,6 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
   @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
   public void shouldConsumeAnEventPublishedToATopic() throws Exception {
     String streamName = UUID.randomUUID().toString();
-    // This timeout is quite high to allow the kinesis coordinator to acquire a
-    // lease on the newly created stream
-    Duration WAIT_FOR_CONSUMPTION = Duration.ofSeconds(120);
-    Duration STREAM_CREATION_TIMEOUT = Duration.ofSeconds(10);
     createKinesisStream(streamName, STREAM_CREATION_TIMEOUT);
 
     List<EventMessage> consumedMessages = new ArrayList<>();
@@ -97,6 +97,27 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
 
     kinesisBroker().send(streamName, eventMessage());
     WaitUtil.waitUntil(() -> consumedMessages.size() > 0, WAIT_FOR_CONSUMPTION);
+  }
+
+  @Test
+  @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
+  @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
+  public void shouldReplayMessages() throws Exception {
+    String streamName = UUID.randomUUID().toString();
+    createKinesisStream(streamName, STREAM_CREATION_TIMEOUT);
+
+    List<EventMessage> consumedMessages = new ArrayList<>();
+    kinesisBroker().receiveAsync(streamName, consumedMessages::add);
+
+    kinesisBroker().send(streamName, eventMessage());
+
+    WaitUtil.waitUntil(() -> consumedMessages.size() == 1, WAIT_FOR_CONSUMPTION);
+
+    kinesisBroker().disconnect();
+    kinesisBroker().receiveAsync(streamName, consumedMessages::add);
+    kinesisBroker().replayAllEvents(streamName);
+
+    WaitUtil.waitUntil(() -> consumedMessages.size() == 2, WAIT_FOR_CONSUMPTION);
   }
 
   public KinesisBrokerApi kinesisBroker() {

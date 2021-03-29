@@ -51,6 +51,7 @@ gerrit_plugin(
 
 junit_tests(
     name = "kinesis_events_tests",
+    timeout = "long",
     srcs = glob(["src/test/java/**/*.java"]),
     tags = ["kinesis-events"],
     deps = [
