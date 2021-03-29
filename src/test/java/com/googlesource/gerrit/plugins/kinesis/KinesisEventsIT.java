@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.kinesis;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.testcontainers.containers.localstack.LocalStackContainer.Service.CLOUDWATCH;
 import static org.testcontainers.containers.localstack.LocalStackContainer.Service.DYNAMODB;
 import static org.testcontainers.containers.localstack.LocalStackContainer.Service.KINESIS;
@@ -29,6 +30,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 import org.junit.Before;
 import org.junit.Test;
 import org.testcontainers.containers.localstack.LocalStackContainer;
@@ -43,6 +45,10 @@ import software.amazon.awssdk.services.kinesis.model.StreamStatus;
 
 @TestPlugin(name = "kinesis-events", sysModule = "com.googlesource.gerrit.plugins.kinesis.Module")
 public class KinesisEventsIT extends LightweightPluginDaemonTest {
+  // This timeout is quite high to allow the kinesis coordinator to acquire a
+  // lease on the newly created stream
+  private static final Duration WAIT_FOR_CONSUMPTION = Duration.ofSeconds(120);
+  private static final Duration STREAM_CREATION_TIMEOUT = Duration.ofSeconds(10);
 
   private static final int LOCALSTACK_PORT = 4566;
   private LocalStackContainer localstack =
@@ -86,10 +92,6 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
   @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
   public void shouldConsumeAnEventPublishedToATopic() throws Exception {
     String streamName = UUID.randomUUID().toString();
-    // This timeout is quite high to allow the kinesis coordinator to acquire a
-    // lease on the newly created stream
-    Duration WAIT_FOR_CONSUMPTION = Duration.ofSeconds(120);
-    Duration STREAM_CREATION_TIMEOUT = Duration.ofSeconds(10);
     createKinesisStream(streamName, STREAM_CREATION_TIMEOUT);
 
     List<EventMessage> consumedMessages = new ArrayList<>();
@@ -97,6 +99,35 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
 
     kinesisBroker().send(streamName, eventMessage());
     WaitUtil.waitUntil(() -> consumedMessages.size() > 0, WAIT_FOR_CONSUMPTION);
+  }
+
+  @Test
+  @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
+  @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
+  public void shouldReplayMessages() throws Exception {
+    String streamName = UUID.randomUUID().toString();
+    createKinesisStream(streamName, STREAM_CREATION_TIMEOUT);
+
+    EventConsumerCounter eventConsumerCounter = new EventConsumerCounter();
+    kinesisBroker().receiveAsync(streamName, eventConsumerCounter);
+
+    EventMessage event = eventMessage();
+    kinesisBroker().send(streamName, event);
+
+    WaitUtil.waitUntil(
+        () -> eventConsumerCounter.getConsumedMessages().size() == 1, WAIT_FOR_CONSUMPTION);
+    assertThat(eventConsumerCounter.getConsumedMessages().get(0).getHeader().eventId)
+        .isEqualTo(event.getHeader().eventId);
+
+    eventConsumerCounter.clear();
+    kinesisBroker().disconnect();
+    kinesisBroker().receiveAsync(streamName, eventConsumerCounter);
+    kinesisBroker().replayAllEvents(streamName);
+
+    WaitUtil.waitUntil(
+        () -> eventConsumerCounter.getConsumedMessages().size() == 1, WAIT_FOR_CONSUMPTION);
+    assertThat(eventConsumerCounter.getConsumedMessages().get(0).getHeader().eventId)
+        .isEqualTo(event.getHeader().eventId);
   }
 
   public KinesisBrokerApi kinesisBroker() {
@@ -121,5 +152,22 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
   private EventMessage eventMessage() {
     return new EventMessage(
         new EventMessage.Header(UUID.randomUUID(), UUID.randomUUID()), new ProjectCreatedEvent());
+  }
+
+  private class EventConsumerCounter implements Consumer<EventMessage> {
+    List<EventMessage> consumedMessages = new ArrayList<>();
+
+    @Override
+    public void accept(EventMessage eventMessage) {
+      consumedMessages.add(eventMessage);
+    }
+
+    public List<EventMessage> getConsumedMessages() {
+      return consumedMessages;
+    }
+
+    public void clear() {
+      consumedMessages.clear();
+    }
   }
 }
