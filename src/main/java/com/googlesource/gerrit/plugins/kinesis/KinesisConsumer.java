@@ -33,6 +33,7 @@ class KinesisConsumer {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private final KinesisConfiguration kinesisConfiguration;
   private final KinesisRecordProcessorFactory.Factory kinesisRecordProcessorFactory;
+  private final CheckpointResetter checkpointResetter;
   private final ExecutorService executor;
   private ConfigsBuilder configsBuilder;
   private Scheduler kinesisScheduler;
@@ -45,9 +46,11 @@ class KinesisConsumer {
   public KinesisConsumer(
       KinesisConfiguration kinesisConfiguration,
       KinesisRecordProcessorFactory.Factory kinesisRecordProcessorFactory,
+      CheckpointResetter checkpointResetter,
       @ConsumerExecutor ExecutorService executor) {
     this.kinesisConfiguration = kinesisConfiguration;
     this.kinesisRecordProcessorFactory = kinesisRecordProcessorFactory;
+    this.checkpointResetter = checkpointResetter;
     this.executor = executor;
   }
 
@@ -99,6 +102,13 @@ class KinesisConsumer {
   }
 
   public void resetOffset() {
+    // Move all checkpoints (if any) to TRIM_HORIZON, so that the consumer
+    // scheduler will start consuming from beginning.
+    checkpointResetter.setAllShardsToBeginning(streamName);
+
+    // Even when no checkpoints have been persisted, instruct the consumer
+    // scheduler to start from TRIM_HORIZON, irrespective of 'initialPosition'
+    // configuration.
     resetOffset.set(true);
   }
 }
