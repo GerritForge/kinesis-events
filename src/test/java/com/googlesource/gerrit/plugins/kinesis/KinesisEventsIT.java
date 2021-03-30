@@ -52,6 +52,7 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
   private LocalStackContainer localstack =
       new LocalStackContainer(DockerImageName.parse("localstack/localstack:0.12.8"))
           .withServices(DYNAMODB, KINESIS, CLOUDWATCH)
+          .withEnv("USE_SSL", "true")
           .withExposedPorts(LOCALSTACK_PORT);
 
   private KinesisClient kinesisClient;
