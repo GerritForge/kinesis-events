@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.kinesis;
 
+import com.amazonaws.services.kinesis.producer.KinesisProducer;
+import com.amazonaws.services.kinesis.producer.KinesisProducerConfiguration;
 import com.google.common.base.Strings;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginName;
@@ -44,6 +46,8 @@ class KinesisConfiguration {
   private static final String DEFAULT_INITIAL_POSITION = "latest";
   private static final Long DEFAULT_POLLING_INTERVAL_MS = 1000L;
   private static final Integer DEFAULT_MAX_RECORDS = 100;
+  private static final Long DEFAULT_PUBLISH_SINGLE_REQUEST_TIMEOUT_MS = 6000L;
+  private static final Long DEFAULT_PUBLISH_TIMEOUT_MS = 6000L;
 
   private final String applicationName;
   private final String streamEventsTopic;
@@ -56,6 +60,9 @@ class KinesisConfiguration {
   private final Optional<URI> endpoint;
   private final Long pollingIntervalMs;
   private final Integer maxRecords;
+  private final KinesisProducer kinesisProducer;
+  private final Long publishTimeoutMs;
+  private final Long publishSingleRequestTimeoutMs;
 
   @Inject
   public KinesisConfiguration(PluginConfigFactory configFactory, @PluginName String pluginName) {
@@ -85,10 +92,22 @@ class KinesisConfiguration {
             .map(Integer::parseInt)
             .orElse(DEFAULT_MAX_RECORDS);
 
+    this.publishSingleRequestTimeoutMs =
+        Optional.ofNullable(getStringParam(pluginConfig, "publishSingleRequestTimeoutMs", null))
+            .map(Long::parseLong)
+            .orElse(DEFAULT_PUBLISH_SINGLE_REQUEST_TIMEOUT_MS);
+
+    this.publishTimeoutMs =
+        Optional.ofNullable(getStringParam(pluginConfig, "publishTimeoutMs", null))
+            .map(Long::parseLong)
+            .orElse(DEFAULT_PUBLISH_TIMEOUT_MS);
+
     this.kinesisClient =
         KinesisClientUtil.createKinesisAsyncClient(configureBuilder(KinesisAsyncClient.builder()));
     this.dynamoClient = configureBuilder(DynamoDbAsyncClient.builder()).build();
     this.cloudWatchClient = configureBuilder(CloudWatchAsyncClient.builder()).build();
+
+    this.kinesisProducer = buildKinesisProducer();
 
     logger.atInfo().log(
         "Kinesis client. Application:'%s'|PollingInterval: %s|maxRecords: %s%s%s",
@@ -117,6 +136,14 @@ class KinesisConfiguration {
 
   public String getApplicationName() {
     return applicationName;
+  }
+
+  public KinesisProducer getKinesisProducer() {
+    return kinesisProducer;
+  }
+
+  public Long getPublishTimeoutMs() {
+    return publishTimeoutMs;
   }
 
   public ConfigsBuilder createConfigBuilder(
@@ -160,5 +187,24 @@ class KinesisConfiguration {
     region.ifPresent(builder::region);
     endpoint.ifPresent(builder::endpointOverride);
     return builder;
+  }
+
+  private KinesisProducer buildKinesisProducer() {
+    KinesisProducerConfiguration conf =
+        new KinesisProducerConfiguration()
+            .setAggregationEnabled(false)
+            .setMaxConnections(1)
+            .setRequestTimeout(publishSingleRequestTimeoutMs);
+
+    region.ifPresent(r -> conf.setRegion(r.toString()));
+    endpoint.ifPresent(
+        uri ->
+            conf.setKinesisEndpoint(uri.getHost())
+                .setKinesisPort(uri.getPort())
+                .setCloudwatchEndpoint(uri.getHost())
+                .setCloudwatchPort(uri.getPort())
+                .setVerifyCertificate(false));
+
+    return new KinesisProducer(conf);
   }
 }
