@@ -54,6 +54,7 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
   private LocalStackContainer localstack =
       new LocalStackContainer(DockerImageName.parse("localstack/localstack:0.12.8"))
           .withServices(DYNAMODB, KINESIS, CLOUDWATCH)
+          .withEnv("USE_SSL", "true")
           .withExposedPorts(LOCALSTACK_PORT);
 
   private KinesisClient kinesisClient;
@@ -92,7 +93,7 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
   @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
   public void shouldConsumeAnEventPublishedToATopic() throws Exception {
     String streamName = UUID.randomUUID().toString();
-    createKinesisStream(streamName, STREAM_CREATION_TIMEOUT);
+    createStreamAndWait(streamName, STREAM_CREATION_TIMEOUT);
 
     EventConsumerCounter eventConsumerCounter = new EventConsumerCounter();
     kinesisBroker().receiveAsync(streamName, eventConsumerCounter);
@@ -109,7 +110,7 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
   @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
   public void shouldReplayMessages() throws Exception {
     String streamName = UUID.randomUUID().toString();
-    createKinesisStream(streamName, STREAM_CREATION_TIMEOUT);
+    createStreamAndWait(streamName, STREAM_CREATION_TIMEOUT);
 
     EventConsumerCounter eventConsumerCounter = new EventConsumerCounter();
     kinesisBroker().receiveAsync(streamName, eventConsumerCounter);
@@ -133,14 +134,38 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
         .isEqualTo(event.getHeader().eventId);
   }
 
+  @Test
+  @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
+  @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
+  @GerritConfig(name = "plugin.kinesis-events.publishTimeoutMs", value = "1000")
+  public void shouldRetryUntilSuccessful() {
+    String streamName = UUID.randomUUID().toString();
+    createStreamAsync(streamName);
+
+    PublishResult publishResult = kinesisBroker().sendWithResult(streamName, eventMessage());
+    assertThat(publishResult.isSuccess()).isTrue();
+    assertThat(publishResult.attempts()).isGreaterThan(1);
+  }
+
+  @Test
+  @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
+  @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
+  @GerritConfig(name = "plugin.kinesis-events.publishTimeoutMs", value = "200")
+  public void shouldGiveUpWhenTimingOut() {
+    String streamName = UUID.randomUUID().toString();
+    createStreamAsync(streamName);
+
+    PublishResult publishResult = kinesisBroker().sendWithResult(streamName, eventMessage());
+    assertThat(publishResult.isSuccess()).isFalse();
+  }
+
   public KinesisBrokerApi kinesisBroker() {
     return (KinesisBrokerApi) plugin.getSysInjector().getInstance(BrokerApi.class);
   }
 
-  private void createKinesisStream(String streamName, Duration timeout)
+  private void createStreamAndWait(String streamName, Duration timeout)
       throws InterruptedException {
-    kinesisClient.createStream(
-        CreateStreamRequest.builder().streamName(streamName).shardCount(1).build());
+    createStreamAsync(streamName);
 
     WaitUtil.waitUntil(
         () ->
@@ -150,6 +175,11 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
                 .streamStatus()
                 .equals(StreamStatus.ACTIVE),
         timeout);
+  }
+
+  private void createStreamAsync(String streamName) {
+    kinesisClient.createStream(
+        CreateStreamRequest.builder().streamName(streamName).shardCount(1).build());
   }
 
   private EventMessage eventMessage() {
