@@ -44,6 +44,8 @@ class KinesisConfiguration {
   private static final String DEFAULT_INITIAL_POSITION = "latest";
   private static final Long DEFAULT_POLLING_INTERVAL_MS = 1000L;
   private static final Integer DEFAULT_MAX_RECORDS = 100;
+  private static final Long DEFAULT_PUBLISH_SINGLE_REQUEST_TIMEOUT_MS = 6000L;
+  private static final Long DEFAULT_PUBLISH_TIMEOUT_MS = 6000L;
 
   private final String applicationName;
   private final String streamEventsTopic;
@@ -56,6 +58,8 @@ class KinesisConfiguration {
   private final Optional<URI> endpoint;
   private final Long pollingIntervalMs;
   private final Integer maxRecords;
+  private final Long publishTimeoutMs;
+  private final Long publishSingleRequestTimeoutMs;
 
   @Inject
   public KinesisConfiguration(PluginConfigFactory configFactory, @PluginName String pluginName) {
@@ -84,6 +88,16 @@ class KinesisConfiguration {
         Optional.ofNullable(getStringParam(pluginConfig, "maxRecords", null))
             .map(Integer::parseInt)
             .orElse(DEFAULT_MAX_RECORDS);
+
+    this.publishSingleRequestTimeoutMs =
+        Optional.ofNullable(getStringParam(pluginConfig, "publishSingleRequestTimeoutMs", null))
+            .map(Long::parseLong)
+            .orElse(DEFAULT_PUBLISH_SINGLE_REQUEST_TIMEOUT_MS);
+
+    this.publishTimeoutMs =
+        Optional.ofNullable(getStringParam(pluginConfig, "publishTimeoutMs", null))
+            .map(Long::parseLong)
+            .orElse(DEFAULT_PUBLISH_TIMEOUT_MS);
 
     this.kinesisClient =
         KinesisClientUtil.createKinesisAsyncClient(configureBuilder(KinesisAsyncClient.builder()));
@@ -117,6 +131,22 @@ class KinesisConfiguration {
 
   public String getApplicationName() {
     return applicationName;
+  }
+
+  public Long getPublishTimeoutMs() {
+    return publishTimeoutMs;
+  }
+
+  public Optional<Region> getRegion() {
+    return region;
+  }
+
+  public Optional<URI> getEndpoint() {
+    return endpoint;
+  }
+
+  public Long getPublishSingleRequestTimeoutMs() {
+    return publishSingleRequestTimeoutMs;
   }
 
   public ConfigsBuilder createConfigBuilder(
