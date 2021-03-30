@@ -169,12 +169,36 @@ def external_plugin_deps():
 
     maven_jar(
         name = 'aws-java-sdk-core',
-        artifact = 'com.amazonaws:aws-java-sdk-core:1.11.978',
-        sha1 = 'c27115f533183338a80d34a7c97e0b28fa55bb9b',
+        artifact = 'com.amazonaws:aws-java-sdk-core:1.11.960',
+        sha1 = '18b6b2a5cb83a0e2e33a593302b5dbe0ca2ade64',
     )
 
     maven_jar(
         name = 'awssdk-url-connection-client',
         artifact = 'software.amazon.awssdk:url-connection-client:' + AWS_SDK_VER,
         sha1 = 'b84ac8bae45841bc65af3c4f55164d9a3399b653',
+    )
+
+    maven_jar(
+        name = 'awssdk-kinesis-producer',
+        artifact = 'com.amazonaws:amazon-kinesis-producer:0.14.6',
+        sha1 = '7f83582df816dccc5217f05ece309a5cd8c7a9a5',
+    )
+
+    maven_jar(
+        name = 'aws-glue-schema-serde',
+        artifact = 'software.amazon.glue:schema-registry-serde:1.0.0',
+        sha1 = '30815b670f89876465caa69b47e6df6fd6875d0f',
+    )
+
+    maven_jar(
+        name = 'apache-commons-io',
+        artifact = 'commons-io:commons-io:2.4',
+        sha1 = 'b1b6ea3b7e4aa4f492509a4952029cd8e48019ad',
+    )
+
+    maven_jar(
+        name = 'javax-xml-bind',
+        artifact = 'javax.xml.bind:jaxb-api:2.3.1',
+        sha1 = '8531ad5ac454cc2deb9d4d32c40c4d7451939b5d',
     )
