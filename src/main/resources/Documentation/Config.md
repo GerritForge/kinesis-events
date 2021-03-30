@@ -64,6 +64,18 @@ The kinesis-events plugin is configured by adding a plugin stanza in the
 
     Default: "LATEST"
 
+`plugin.kinesis-events.publishSingleRequestTimeoutMs`
+: Optional. The maximum total time (milliseconds) elapsed between when a publish
+  request started and the receiving a response. If it goes over, the request
+  will be timed-out and possibly tried again, if `publishTimeoutMs` allows.
+  Default: 6000
+
+`plugin.kinesis-events.publishTimeoutMs`
+: Optional. The maximum total time (milliseconds) waiting for publishing a record
+  to kinesis, including retries.
+  If it goes over, the request will be timed-out and not attempted again.
+  Default: 6000
+
 Overrides
 =========================
 
