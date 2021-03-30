@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.kinesis;
 
 import static com.google.inject.Scopes.SINGLETON;
 
+import com.amazonaws.services.kinesis.producer.KinesisProducer;
 import com.gerritforge.gerrit.eventbroker.BrokerApi;
 import com.gerritforge.gerrit.eventbroker.EventGsonProvider;
 import com.gerritforge.gerrit.eventbroker.TopicSubscriber;
@@ -62,6 +63,7 @@ public class Module extends LifecycleModule {
         .annotatedWith(ConsumerExecutor.class)
         .toProvider(ConsumerExecutorProvider.class)
         .in(SINGLETON);
+    bind(KinesisProducer.class).toProvider(KinesisProducerProvider.class);
     bind(new TypeLiteral<Set<TopicSubscriber>>() {}).toInstance(activeConsumers);
     DynamicItem.bind(binder(), BrokerApi.class).to(KinesisBrokerApi.class).in(Scopes.SINGLETON);
     bind(Gson.class).toProvider(EventGsonProvider.class).in(Singleton.class);

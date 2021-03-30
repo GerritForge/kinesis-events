@@ -14,28 +14,36 @@
 
 package com.googlesource.gerrit.plugins.kinesis;
 
+import com.amazonaws.services.kinesis.producer.Attempt;
+import com.amazonaws.services.kinesis.producer.KinesisProducer;
+import com.amazonaws.services.kinesis.producer.UserRecordResult;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.server.events.Event;
 import com.google.gerrit.server.events.EventListener;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.nio.ByteBuffer;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
-import org.apache.commons.codec.binary.Base64;
-import software.amazon.awssdk.core.SdkBytes;
-import software.amazon.awssdk.services.kinesis.model.PutRecordRequest;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @Singleton
 class KinesisPublisher implements EventListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
+  private final KinesisProducer kinesisProducer;
   private final KinesisConfiguration kinesisConfiguration;
 
   private final Gson gson;
 
   @Inject
-  public KinesisPublisher(Gson gson, KinesisConfiguration kinesisConfiguration) {
+  public KinesisPublisher(
+      Gson gson, KinesisProducer kinesisProducer, KinesisConfiguration kinesisConfiguration) {
     this.gson = gson;
+    this.kinesisProducer = kinesisProducer;
     this.kinesisConfiguration = kinesisConfiguration;
   }
 
@@ -44,29 +52,69 @@ class KinesisPublisher implements EventListener {
     publish(kinesisConfiguration.getStreamEventsTopic(), gson.toJson(event), event.getType());
   }
 
-  public boolean publish(String streamName, String stringEvent, String partitionKey) {
-    PutRecordRequest request =
-        PutRecordRequest.builder()
-            .partitionKey(partitionKey)
-            .streamName(streamName)
-            .data(SdkBytes.fromByteArray(Base64.encodeBase64(stringEvent.getBytes())))
-            .build();
+  public PublishResult publish(String streamName, String stringEvent, String partitionKey) {
+    logger.atFiner().log(
+        "KINESIS PRODUCER - Attempt to publish event %s to stream %s [PK: %s]",
+        stringEvent, streamName, partitionKey);
+
+    UserRecordResult result = null;
     try {
-      logger.atInfo().log(
-          "KINESIS PUBLISH event %s to stream %s [PK: %s]", stringEvent, streamName, partitionKey);
-      kinesisConfiguration.getKinesisClient().putRecord(request).get();
-      return true;
+      result =
+          kinesisProducer
+              .addUserRecord(streamName, partitionKey, ByteBuffer.wrap(stringEvent.getBytes()))
+              .get(kinesisConfiguration.getPublishTimeoutMs(), TimeUnit.MILLISECONDS);
+
+      List<Attempt> attemptsDetails = result.getAttempts();
+      int numberOfAttempts = attemptsDetails.size();
+      if (result.isSuccessful()) {
+        logger.atFine().log(
+            "KINESIS PRODUCER - Successfully published event '%s' to shardId '%s' [PK: %s] [Sequence: %s] after %s attempt(s)",
+            stringEvent,
+            result.getShardId(),
+            partitionKey,
+            result.getSequenceNumber(),
+            numberOfAttempts);
+        return PublishResult.success(numberOfAttempts);
+      } else {
+        int currentIdx = numberOfAttempts - 1;
+        int previousIdx = currentIdx - 1;
+        Attempt current = attemptsDetails.get(currentIdx);
+        if (previousIdx >= 0) {
+          Attempt previous = attemptsDetails.get(previousIdx);
+          logger.atSevere().log(
+              String.format(
+                  "KINESIS PRODUCER - Failed publishing event '%s' [PK: %s] - %s : %s. Previous failure - %s : %s",
+                  stringEvent,
+                  partitionKey,
+                  current.getErrorCode(),
+                  current.getErrorMessage(),
+                  previous.getErrorCode(),
+                  previous.getErrorMessage()));
+        } else {
+          logger.atSevere().log(
+              String.format(
+                  "KINESIS PRODUCER - Failed publishing event '%s' [PK: %s] - %s : %s.",
+                  stringEvent, partitionKey, current.getErrorCode(), current.getErrorMessage()));
+        }
+      }
     } catch (InterruptedException e) {
-      logger.atInfo().log(
+      logger.atSevere().withCause(e).log(
           String.format(
-              "Interrupted while publishing event %s to stream %s. Assuming shutdown.",
-              stringEvent, streamName));
+              "KINESIS PRODUCER - Interrupted publishing event '%s' [PK: %s]",
+              stringEvent, partitionKey));
     } catch (ExecutionException e) {
       logger.atSevere().withCause(e).log(
           String.format(
-              "Execution exception when publishing event %s to stream %s",
-              stringEvent, streamName));
+              "KINESIS PRODUCER - Error when publishing event '%s' [PK: %s]",
+              stringEvent, partitionKey));
+    } catch (TimeoutException e) {
+      logger.atSevere().withCause(e).log(
+          String.format(
+              "KINESIS PRODUCER - Timeout when publishing event '%s' [PK: %s]",
+              stringEvent, partitionKey));
     }
-    return false;
+
+    return PublishResult.failure(
+        Optional.ofNullable(result).map(r -> r.getAttempts().size()).orElse(0));
   }
 }

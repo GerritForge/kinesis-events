@@ -43,6 +43,10 @@ class KinesisBrokerApi implements BrokerApi {
 
   @Override
   public boolean send(String streamName, EventMessage event) {
+    return sendWithResult(streamName, event).isSuccess();
+  }
+
+  PublishResult sendWithResult(String streamName, EventMessage event) {
     return kinesisPublisher.publish(
         streamName, gson.toJson(event), event.getHeader().sourceInstanceId.toString());
   }

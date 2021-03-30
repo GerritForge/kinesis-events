@@ -178,3 +178,33 @@ def external_plugin_deps():
         artifact = 'software.amazon.awssdk:url-connection-client:' + AWS_SDK_VER,
         sha1 = 'b84ac8bae45841bc65af3c4f55164d9a3399b653',
     )
+
+    maven_jar(
+        name = 'awssdk-kinesis-producer',
+        artifact = 'com.amazonaws:amazon-kinesis-producer:0.14.6',
+        sha1 = '7f83582df816dccc5217f05ece309a5cd8c7a9a5',
+    )
+
+    maven_jar(
+        name = 'aws-glue-schema-serde',
+        artifact = 'software.amazon.glue:schema-registry-serde:1.0.1',
+        sha1 = '961c354a60404f3c647e7162f642b4ee9b6b76c1',
+    )
+
+    maven_jar(
+        name = 'apache-commons-io',
+        artifact = 'commons-io:commons-io:2.6',
+        sha1 = '815893df5f31da2ece4040fe0a12fd44b577afaf',
+    )
+
+    maven_jar(
+        name = 'javax-servlet-api',
+        artifact = 'javax.servlet:javax.servlet-api:4.0.1',
+        sha1 = 'a27082684a2ff0bf397666c3943496c44541d1ca',
+    )
+
+    maven_jar(
+        name = 'javax-xml-bind',
+        artifact = 'javax.xml.bind:jaxb-api:2.3.1',
+        sha1 = '8531ad5ac454cc2deb9d4d32c40c4d7451939b5d',
+    )
