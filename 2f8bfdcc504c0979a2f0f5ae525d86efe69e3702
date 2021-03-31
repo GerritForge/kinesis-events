@@ -22,6 +22,30 @@
       },
       "revId": "2f8bfdcc504c0979a2f0f5ae525d86efe69e3702",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83222938_101f3216",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-31T10:29:50Z",
+      "side": 1,
+      "message": "I don\u0027t think this adds much to be honest.\n\nserialization and deserialization should be covered by EventGsonProvider, I think here we should just test that the message that we sent is the message that we received.\n\nIn these tests we are sending an arbitrary ProjectCreatedEvent, if we were worried about serialization we should be testing every possible event.\n\nWDYT?",
+      "parentUuid": "6f33200f_c33fa074",
+      "range": {
+        "startLine": 103,
+        "startChar": 3,
+        "endLine": 104,
+        "endChar": 90
+      },
+      "revId": "2f8bfdcc504c0979a2f0f5ae525d86efe69e3702",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
