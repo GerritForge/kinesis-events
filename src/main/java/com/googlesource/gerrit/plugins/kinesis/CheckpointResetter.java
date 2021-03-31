@@ -46,10 +46,14 @@ class CheckpointResetter {
   private static final Integer DYNAMODB_RESPONSE_TIMEOUT_SECS = 5;
 
   private final KinesisConfiguration kinesisConfiguration;
+  private final DynamoDbAsyncClientProvider dynamoDbAsyncClientProvider;
 
   @Inject
-  CheckpointResetter(KinesisConfiguration kinesisConfiguration) {
+  CheckpointResetter(
+      KinesisConfiguration kinesisConfiguration,
+      DynamoDbAsyncClientProvider dynamoDbAsyncClientProvider) {
     this.kinesisConfiguration = kinesisConfiguration;
+    this.dynamoDbAsyncClientProvider = dynamoDbAsyncClientProvider;
   }
 
   public void setAllShardsToBeginning(String streamName) {
@@ -70,8 +74,8 @@ class CheckpointResetter {
                 .build());
 
         UpdateItemResponse updateItemResponse =
-            kinesisConfiguration
-                .getDynamoClient()
+            dynamoDbAsyncClientProvider
+                .get()
                 .updateItem(
                     UpdateItemRequest.builder()
                         .tableName(leaseTable)
@@ -104,8 +108,8 @@ class CheckpointResetter {
               .build();
 
       ScanResponse scanResponse =
-          kinesisConfiguration
-              .getDynamoClient()
+          dynamoDbAsyncClientProvider
+              .get()
               .scan(scanRequest)
               .get(DYNAMODB_RESPONSE_TIMEOUT_SECS, TimeUnit.SECONDS);
       return scanResponse.items().stream()
