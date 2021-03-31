@@ -45,6 +45,30 @@
       },
       "revId": "7d795880b218415fd632f9bc30177bf2b740bc8f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20f69b4f_171225a1",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-31T09:04:50Z",
+      "side": 1,
+      "message": "This is just preparation for the next change, where we are using the same timeout.\nBut you are right, we technically it should be moved in the follow up change not here.\n\nLet me do that.",
+      "parentUuid": "5c01ce26_e24d0d91",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 49,
+        "endChar": 81
+      },
+      "revId": "7d795880b218415fd632f9bc30177bf2b740bc8f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
