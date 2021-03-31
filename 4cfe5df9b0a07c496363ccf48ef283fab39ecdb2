@@ -24,6 +24,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "138e5b9d_d39afd9f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-31T12:37:44Z",
+      "side": 1,
+      "message": "It is a singleton, see L41",
+      "parentUuid": "830fb7e7_2adb4e40",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 29
+      },
+      "revId": "4cfe5df9b0a07c496363ccf48ef283fab39ecdb2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0af46a80_3e12230c",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2c5f383_d39efc42",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-31T12:37:44Z",
+      "side": 1,
+      "message": "I see your point, but these are AWS clients that we pass as configuration to the ConfigsBuilder, see L149, so we are treating them as configuration.\n\nIt is true that we also use some client directly though (i.e. dynamodb client is used by the checkpoint resetter).\n\nLet me see if I can find a way to restructure this in a followup change.",
+      "parentUuid": "0af46a80_3e12230c",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 86
+      },
+      "revId": "4cfe5df9b0a07c496363ccf48ef283fab39ecdb2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a8be4d9_67fca5f4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConfiguration.java",
         "patchSetId": 4
@@ -60,6 +108,30 @@
       "writtenOn": "2021-03-31T10:13:46Z",
       "side": 1,
       "message": "is this a good place to initialise producer? My understanding is that this class just serves the configuration. We should separate this logic to Providers/Factory",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 50
+      },
+      "revId": "4cfe5df9b0a07c496363ccf48ef283fab39ecdb2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "797b5a57_91871d33",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-31T12:37:44Z",
+      "side": 1,
+      "message": "good point, differently from other *clients, I believe this is actually starting a new thread.\n\nLet me fix it",
+      "parentUuid": "3a8be4d9_67fca5f4",
       "range": {
         "startLine": 110,
         "startChar": 4,
