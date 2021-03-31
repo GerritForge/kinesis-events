@@ -23,18 +23,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.net.URI;
 import java.util.Optional;
-import software.amazon.awssdk.awscore.client.builder.AwsClientBuilder;
 import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient;
-import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
-import software.amazon.awssdk.services.kinesis.KinesisAsyncClient;
-import software.amazon.kinesis.common.ConfigsBuilder;
 import software.amazon.kinesis.common.InitialPositionInStream;
-import software.amazon.kinesis.common.InitialPositionInStreamExtended;
-import software.amazon.kinesis.common.KinesisClientUtil;
-import software.amazon.kinesis.processor.ShardRecordProcessorFactory;
-import software.amazon.kinesis.retrieval.RetrievalConfig;
-import software.amazon.kinesis.retrieval.polling.PollingConfig;
 
 @Singleton
 class KinesisConfiguration {
@@ -50,13 +40,12 @@ class KinesisConfiguration {
   private final String applicationName;
   private final String streamEventsTopic;
   private final int numberOfSubscribers;
-  private final KinesisAsyncClient kinesisClient;
-  private final DynamoDbAsyncClient dynamoClient;
-  private final CloudWatchAsyncClient cloudWatchClient;
   private final InitialPositionInStream initialPosition;
   private final Optional<Region> region;
   private final Optional<URI> endpoint;
+
   private final Long pollingIntervalMs;
+
   private final Integer maxRecords;
   private final Long publishTimeoutMs;
   private final Long publishSingleRequestTimeoutMs;
@@ -99,11 +88,6 @@ class KinesisConfiguration {
             .map(Long::parseLong)
             .orElse(DEFAULT_PUBLISH_TIMEOUT_MS);
 
-    this.kinesisClient =
-        KinesisClientUtil.createKinesisAsyncClient(configureBuilder(KinesisAsyncClient.builder()));
-    this.dynamoClient = configureBuilder(DynamoDbAsyncClient.builder()).build();
-    this.cloudWatchClient = configureBuilder(CloudWatchAsyncClient.builder()).build();
-
     logger.atInfo().log(
         "Kinesis client. Application:'%s'|PollingInterval: %s|maxRecords: %s%s%s",
         applicationName,
@@ -119,14 +103,6 @@ class KinesisConfiguration {
 
   public int getNumberOfSubscribers() {
     return numberOfSubscribers;
-  }
-
-  public KinesisAsyncClient getKinesisClient() {
-    return kinesisClient;
-  }
-
-  public DynamoDbAsyncClient getDynamoClient() {
-    return dynamoClient;
   }
 
   public String getApplicationName() {
@@ -149,30 +125,16 @@ class KinesisConfiguration {
     return publishSingleRequestTimeoutMs;
   }
 
-  public ConfigsBuilder createConfigBuilder(
-      String streamName, ShardRecordProcessorFactory processorFactory) {
-    return new ConfigsBuilder(
-        streamName,
-        cosumerLeaseName(applicationName, streamName),
-        kinesisClient,
-        dynamoClient,
-        cloudWatchClient,
-        String.format("klc-worker-%s-%s", applicationName, streamName),
-        processorFactory);
+  public Long getPollingIntervalMs() {
+    return pollingIntervalMs;
   }
 
-  public RetrievalConfig getRetrievalConfig(
-      ConfigsBuilder configsBuilder, String streamName, boolean fromBeginning) {
-    PollingConfig polling =
-        new PollingConfig(streamName, kinesisClient)
-            .idleTimeBetweenReadsInMillis(pollingIntervalMs)
-            .maxRecords(maxRecords);
-    RetrievalConfig retrievalConfig =
-        configsBuilder.retrievalConfig().retrievalSpecificConfig(polling);
-    retrievalConfig.initialPositionInStreamExtended(
-        InitialPositionInStreamExtended.newInitialPosition(
-            fromBeginning ? InitialPositionInStream.TRIM_HORIZON : initialPosition));
-    return retrievalConfig;
+  public Integer getMaxRecords() {
+    return maxRecords;
+  }
+
+  public InitialPositionInStream getInitialPosition() {
+    return initialPosition;
   }
 
   private static String getStringParam(
@@ -184,11 +146,5 @@ class KinesisConfiguration {
 
   public static String cosumerLeaseName(String applicationName, String streamName) {
     return String.format("%s-%s", applicationName, streamName);
-  }
-
-  private <T extends AwsClientBuilder<?, ?>> T configureBuilder(T builder) {
-    region.ifPresent(builder::region);
-    endpoint.ifPresent(builder::endpointOverride);
-    return builder;
   }
 }
