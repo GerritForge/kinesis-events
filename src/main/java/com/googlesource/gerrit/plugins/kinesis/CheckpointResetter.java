@@ -28,6 +28,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
+import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValueUpdate;
 import software.amazon.awssdk.services.dynamodb.model.ResourceNotFoundException;
@@ -46,10 +47,13 @@ class CheckpointResetter {
   private static final Integer DYNAMODB_RESPONSE_TIMEOUT_SECS = 5;
 
   private final KinesisConfiguration kinesisConfiguration;
+  private final DynamoDbAsyncClient dynamoDbAsyncClient;
 
   @Inject
-  CheckpointResetter(KinesisConfiguration kinesisConfiguration) {
+  CheckpointResetter(
+      KinesisConfiguration kinesisConfiguration, DynamoDbAsyncClient dynamoDbAsyncClient) {
     this.kinesisConfiguration = kinesisConfiguration;
+    this.dynamoDbAsyncClient = dynamoDbAsyncClient;
   }
 
   public void setAllShardsToBeginning(String streamName) {
@@ -70,8 +74,7 @@ class CheckpointResetter {
                 .build());
 
         UpdateItemResponse updateItemResponse =
-            kinesisConfiguration
-                .getDynamoClient()
+            dynamoDbAsyncClient
                 .updateItem(
                     UpdateItemRequest.builder()
                         .tableName(leaseTable)
@@ -104,8 +107,7 @@ class CheckpointResetter {
               .build();
 
       ScanResponse scanResponse =
-          kinesisConfiguration
-              .getDynamoClient()
+          dynamoDbAsyncClient
               .scan(scanRequest)
               .get(DYNAMODB_RESPONSE_TIMEOUT_SECS, TimeUnit.SECONDS);
       return scanResponse.items().stream()

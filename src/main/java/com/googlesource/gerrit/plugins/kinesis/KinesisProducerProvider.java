@@ -61,6 +61,18 @@ public class KinesisProducerProvider implements Provider<KinesisProducer> {
             .map(e -> String.format("|endpoint: '%s'", e.toASCIIString()))
             .orElse(""));
 
+    logger.atInfo().log(
+        "Kinesis producer configured. Request Timeout (ms):'%s'%s%s",
+        kinesisConfiguration.getPublishSingleRequestTimeoutMs(),
+        kinesisConfiguration
+            .getRegion()
+            .map(r -> String.format("|region: '%s'", r.id()))
+            .orElse(""),
+        kinesisConfiguration
+            .getEndpoint()
+            .map(e -> String.format("|endpoint: '%s'", e.toASCIIString()))
+            .orElse(""));
+
     return new KinesisProducer(conf);
   }
 }
