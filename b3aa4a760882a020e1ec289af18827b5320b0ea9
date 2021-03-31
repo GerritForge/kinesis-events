@@ -166,6 +166,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eebfb1d6_45ee595c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-31T12:20:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b8392ce_a3527c49",
+      "range": {
+        "startLine": 106,
+        "startChar": 4,
+        "endLine": 106,
+        "endChar": 25
+      },
+      "revId": "b3aa4a760882a020e1ec289af18827b5320b0ea9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d94c2aa8_73a6d873",
