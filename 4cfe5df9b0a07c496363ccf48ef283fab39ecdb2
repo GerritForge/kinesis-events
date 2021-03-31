@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "830fb7e7_2adb4e40",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-03-31T10:13:46Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be a singleton?",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 29
+      },
+      "revId": "4cfe5df9b0a07c496363ccf48ef283fab39ecdb2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0af46a80_3e12230c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-03-31T10:13:46Z",
+      "side": 1,
+      "message": "Same as below, this class is breaking single responsibility principle. We should create Providers or Factory for those objects",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 86
+      },
+      "revId": "4cfe5df9b0a07c496363ccf48ef283fab39ecdb2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a8be4d9_67fca5f4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-03-31T10:13:46Z",
+      "side": 1,
+      "message": "is this a good place to initialise producer? My understanding is that this class just serves the configuration. We should separate this logic to Providers/Factory",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 50
+      },
+      "revId": "4cfe5df9b0a07c496363ccf48ef283fab39ecdb2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

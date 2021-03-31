@@ -46,6 +46,30 @@
       },
       "revId": "4860309a6d3dd3b13c83467d585e66874ce81181",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6245921_e1369fa8",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-03-31T10:13:46Z",
+      "side": 1,
+      "message": "The question is what we want to test. In this test we are checking if aws library is working as expected which I believe is out of scope for this test. If we want to check if our integration with aws library works as expected we could mock com.amazonaws.services.kinesis.producer.KinesisProducer and check if we are setting correct params and what will happen if we throw TimeoutException.\n\nWDYT?",
+      "parentUuid": "cc57ac25_77669ca2",
+      "range": {
+        "startLine": 142,
+        "startChar": 1,
+        "endLine": 142,
+        "endChar": 79
+      },
+      "revId": "4860309a6d3dd3b13c83467d585e66874ce81181",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
