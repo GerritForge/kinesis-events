@@ -69,6 +69,23 @@
       },
       "revId": "7d795880b218415fd632f9bc30177bf2b740bc8f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ab80920_596df733",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-31T09:23:53Z",
+      "side": 1,
+      "message": "nit: empty line",
+      "revId": "7d795880b218415fd632f9bc30177bf2b740bc8f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
