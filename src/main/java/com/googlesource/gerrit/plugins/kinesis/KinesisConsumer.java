@@ -22,7 +22,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
-import software.amazon.kinesis.common.ConfigsBuilder;
 import software.amazon.kinesis.coordinator.Scheduler;
 
 class KinesisConsumer {
@@ -31,11 +30,9 @@ class KinesisConsumer {
   }
 
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-  private final KinesisConfiguration kinesisConfiguration;
-  private final KinesisRecordProcessorFactory.Factory kinesisRecordProcessorFactory;
+  private final SchedulerProvider.Factory schedulerFactory;
   private final CheckpointResetter checkpointResetter;
   private final ExecutorService executor;
-  private ConfigsBuilder configsBuilder;
   private Scheduler kinesisScheduler;
 
   private java.util.function.Consumer<EventMessage> messageProcessor;
@@ -44,12 +41,10 @@ class KinesisConsumer {
 
   @Inject
   public KinesisConsumer(
-      KinesisConfiguration kinesisConfiguration,
-      KinesisRecordProcessorFactory.Factory kinesisRecordProcessorFactory,
+      SchedulerProvider.Factory schedulerFactory,
       CheckpointResetter checkpointResetter,
       @ConsumerExecutor ExecutorService executor) {
-    this.kinesisConfiguration = kinesisConfiguration;
-    this.kinesisRecordProcessorFactory = kinesisRecordProcessorFactory;
+    this.schedulerFactory = schedulerFactory;
     this.checkpointResetter = checkpointResetter;
     this.executor = executor;
   }
@@ -59,25 +54,13 @@ class KinesisConsumer {
     this.streamName = streamName;
     this.messageProcessor = messageProcessor;
 
-    configsBuilder =
-        kinesisConfiguration.createConfigBuilder(
-            streamName, kinesisRecordProcessorFactory.create(messageProcessor));
-
     logger.atInfo().log("Subscribe kinesis consumer to stream [%s]", streamName);
-    runReceiver();
+    runReceiver(messageProcessor);
   }
 
-  private void runReceiver() {
+  private void runReceiver(java.util.function.Consumer<EventMessage> messageProcessor) {
     this.kinesisScheduler =
-        new Scheduler(
-            configsBuilder.checkpointConfig(),
-            configsBuilder.coordinatorConfig(),
-            configsBuilder.leaseManagementConfig(),
-            configsBuilder.lifecycleConfig(),
-            configsBuilder.metricsConfig(),
-            configsBuilder.processorConfig(),
-            kinesisConfiguration.getRetrievalConfig(
-                configsBuilder, streamName, resetOffset.getAndSet(false)));
+        schedulerFactory.create(streamName, resetOffset.getAndSet(false), messageProcessor).get();
     executor.execute(kinesisScheduler);
   }
 
