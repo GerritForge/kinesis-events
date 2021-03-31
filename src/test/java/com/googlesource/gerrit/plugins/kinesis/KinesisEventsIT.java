@@ -94,11 +94,14 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
     String streamName = UUID.randomUUID().toString();
     createKinesisStream(streamName, STREAM_CREATION_TIMEOUT);
 
-    List<EventMessage> consumedMessages = new ArrayList<>();
-    kinesisBroker().receiveAsync(streamName, consumedMessages::add);
+    EventConsumerCounter eventConsumerCounter = new EventConsumerCounter();
+    kinesisBroker().receiveAsync(streamName, eventConsumerCounter);
 
     kinesisBroker().send(streamName, eventMessage());
-    WaitUtil.waitUntil(() -> consumedMessages.size() > 0, WAIT_FOR_CONSUMPTION);
+    WaitUtil.waitUntil(
+        () -> eventConsumerCounter.getConsumedMessages().size() == 1, WAIT_FOR_CONSUMPTION);
+    assertThat(eventConsumerCounter.getConsumedMessages().get(0).getHeader().eventId)
+        .isEqualTo(eventConsumerCounter.getConsumedMessages().get(0).getHeader().eventId);
   }
 
   @Test
