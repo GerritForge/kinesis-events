@@ -16,13 +16,14 @@ package com.googlesource.gerrit.plugins.kinesis;
 
 import com.amazonaws.services.kinesis.producer.KinesisProducer;
 import com.amazonaws.services.kinesis.producer.KinesisProducerConfiguration;
+import com.google.common.flogger.FluentLogger;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
 public class KinesisProducerProvider implements Provider<KinesisProducer> {
-
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private final KinesisConfiguration kinesisConfiguration;
 
   @Inject
@@ -48,6 +49,18 @@ public class KinesisProducerProvider implements Provider<KinesisProducer> {
                     .setCloudwatchEndpoint(uri.getHost())
                     .setCloudwatchPort(uri.getPort())
                     .setVerifyCertificate(false));
+
+    logger.atInfo().log(
+        "Kinesis producer configured. Request Timeout (ms):'%s'%s%s",
+        kinesisConfiguration.getPublishSingleRequestTimeoutMs(),
+        kinesisConfiguration
+            .getRegion()
+            .map(r -> String.format("|region: '%s'", r.id()))
+            .orElse(""),
+        kinesisConfiguration
+            .getEndpoint()
+            .map(e -> String.format("|endpoint: '%s'", e.toASCIIString()))
+            .orElse(""));
 
     return new KinesisProducer(conf);
   }
