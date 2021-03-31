@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab8a75d2_4182d27f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-03-31T07:06:41Z",
+      "side": 1,
+      "message": "unrelated change?",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 79
+      },
+      "revId": "7d795880b218415fd632f9bc30177bf2b740bc8f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c01ce26_e24d0d91",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-03-31T07:06:41Z",
+      "side": 1,
+      "message": "why it\u0027s global if it\u0027s used just in one place?",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 49,
+        "endChar": 81
+      },
+      "revId": "7d795880b218415fd632f9bc30177bf2b740bc8f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
