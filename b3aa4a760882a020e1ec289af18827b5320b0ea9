@@ -305,6 +305,30 @@
       },
       "revId": "b3aa4a760882a020e1ec289af18827b5320b0ea9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "607cefaf_3ac2178d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-03-31T09:56:23Z",
+      "side": 1,
+      "message": "well, is not that obvious because you are creating new receiver so I would expect that you have new consumerMessages instance. Plus if you want to check the message content you already have two so which one is the correct one to check. Logic is getting unnecessary blur",
+      "parentUuid": "a316eeca_92bfc62e",
+      "range": {
+        "startLine": 121,
+        "startChar": 29,
+        "endLine": 121,
+        "endChar": 57
+      },
+      "revId": "b3aa4a760882a020e1ec289af18827b5320b0ea9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
