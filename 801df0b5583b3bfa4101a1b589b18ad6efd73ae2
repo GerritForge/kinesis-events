@@ -22,6 +22,30 @@
       },
       "revId": "801df0b5583b3bfa4101a1b589b18ad6efd73ae2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1930349a_48d96180",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/CheckpointResetter.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-31T12:54:11Z",
+      "side": 1,
+      "message": "Because the exception is thrown during an Execution, they wrap it in an ExecutionException.\n\njava.util.concurrent.ExecutionException: software.amazon.awssdk.services.dynamodb.model.ResourceNotFoundException: Cannot do operations on a non-existent table (Service: DynamoDb, Status Code: 400, Request ID: 040574e0-49f9-42dd-a1b6-bc9b4e29ec7e, Extended Request ID: null)",
+      "parentUuid": "a6afd79f_f8714d88",
+      "range": {
+        "startLine": 114,
+        "startChar": 13,
+        "endLine": 114,
+        "endChar": 22
+      },
+      "revId": "801df0b5583b3bfa4101a1b589b18ad6efd73ae2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
