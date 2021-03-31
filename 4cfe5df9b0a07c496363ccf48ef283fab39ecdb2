@@ -95,6 +95,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56a9bac6_36a8e8eb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-31T16:18:30Z",
+      "side": 1,
+      "message": "Done in a follow up change.",
+      "parentUuid": "d2c5f383_d39efc42",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 86
+      },
+      "revId": "4cfe5df9b0a07c496363ccf48ef283fab39ecdb2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a8be4d9_67fca5f4",
