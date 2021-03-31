@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f33200f_c33fa074",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-03-31T10:23:49Z",
+      "side": 1,
+      "message": "Cloud we also check the message body?",
+      "range": {
+        "startLine": 103,
+        "startChar": 3,
+        "endLine": 104,
+        "endChar": 90
+      },
+      "revId": "2f8bfdcc504c0979a2f0f5ae525d86efe69e3702",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
