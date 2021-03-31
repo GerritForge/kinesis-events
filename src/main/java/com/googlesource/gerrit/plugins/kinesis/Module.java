@@ -33,6 +33,9 @@ import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
+import software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient;
+import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
+import software.amazon.awssdk.services.kinesis.KinesisAsyncClient;
 
 public class Module extends LifecycleModule {
 
@@ -64,6 +67,10 @@ public class Module extends LifecycleModule {
         .toProvider(ConsumerExecutorProvider.class)
         .in(SINGLETON);
     bind(KinesisProducer.class).toProvider(KinesisProducerProvider.class).in(Scopes.SINGLETON);
+    bind(KinesisAsyncClient.class).toProvider(KinesisAsyncClientProvider.class).in(SINGLETON);
+    bind(DynamoDbAsyncClient.class).toProvider(DynamoDbAsyncClientProvider.class).in(SINGLETON);
+    bind(CloudWatchAsyncClient.class).toProvider(CloudWatchAsyncClientProvider.class).in(SINGLETON);
+    factory(SchedulerProvider.Factory.class);
     bind(new TypeLiteral<Set<TopicSubscriber>>() {}).toInstance(activeConsumers);
     DynamicItem.bind(binder(), BrokerApi.class).to(KinesisBrokerApi.class).in(Scopes.SINGLETON);
     bind(Gson.class).toProvider(EventGsonProvider.class).in(Singleton.class);
