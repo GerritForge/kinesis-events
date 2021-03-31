@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa042d8e_bd39fad4",
+        "filename": "external_plugin_deps.bzl",
+        "patchSetId": 8
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-03-31T23:29:18Z",
+      "side": 1,
+      "message": "This is incompatible with the one provided by Gerrit v3.3 (v2.4).\nCan you find an AWS version that uses v2.4?",
+      "range": {
+        "startLine": 196,
+        "startChar": 41,
+        "endLine": 196,
+        "endChar": 46
+      },
+      "revId": "9a0c906a824c9f18ae7c5bec4480f3bbc992aadd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f35c49f3_b0cf826d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisProducerProvider.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-03-31T23:29:18Z",
+      "side": 1,
+      "message": "Should this be configurable? What would be the benefit of having a higher number of max connections?",
+      "range": {
+        "startLine": 38,
+        "startChar": 12,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "9a0c906a824c9f18ae7c5bec4480f3bbc992aadd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61141e00_7ea89d1e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisProducerProvider.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-03-31T23:29:18Z",
+      "side": 1,
+      "message": "Disabling SSL X.509 Validation here? Why? Wouldn\u0027t this expose a main-in-the-middle vulnerability?",
+      "range": {
+        "startLine": 50,
+        "startChar": 20,
+        "endLine": 50,
+        "endChar": 48
+      },
+      "revId": "9a0c906a824c9f18ae7c5bec4480f3bbc992aadd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
