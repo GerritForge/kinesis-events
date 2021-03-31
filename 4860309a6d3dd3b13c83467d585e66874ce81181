@@ -22,6 +22,30 @@
       },
       "revId": "4860309a6d3dd3b13c83467d585e66874ce81181",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc57ac25_77669ca2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-03-31T09:22:01Z",
+      "side": 1,
+      "message": "Yes, if the creation of the kinesis stream completes and it is ACTIVE in less than 200ms the test will fail, but that\u0027s unlikely I would say: during my tests I found that it takes around 600ms for the stream to be ready, so 200ms seemed sufficiently safe, as it is 3 times less than that.\n\nWe have the same problem with the previous test right? if it took more than 1000ms for the stream to be ready the test would fail.\n\nI think concerns are in the nature of timeout-based tests.\n\nCan you think of a different way to simulate a temporary outage that eventually will succeed?",
+      "parentUuid": "532c780e_8843159b",
+      "range": {
+        "startLine": 142,
+        "startChar": 1,
+        "endLine": 142,
+        "endChar": 79
+      },
+      "revId": "4860309a6d3dd3b13c83467d585e66874ce81181",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
