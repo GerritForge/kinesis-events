@@ -140,6 +140,30 @@
       },
       "revId": "9a0c906a824c9f18ae7c5bec4480f3bbc992aadd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a475485_9333fd5d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisProducerProvider.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-01T07:38:22Z",
+      "side": 1,
+      "message": "\u003e It would not expose it because this is only used when overriding the official AWS endpoint to connect locally (aka localstack) rather than public AWS endpoints.\n\u003e \n\u003e It is due to two factors:\n\u003e - TLS cannot be deactivated for KPL ([1])\n\u003e - When USE_SSL flag is passed, localstack uses locally generated certificates, so SSL has to be disabled.\n\ntypo: SSL *validation* has to be disabled.\n\n\u003e \n\u003e [1]https://github.com/awslabs/amazon-kinesis-producer/blob/master/java/amazon-kinesis-producer/src/main/java/com/amazonaws/services/kinesis/producer/KinesisProducerConfiguration.java#L427",
+      "parentUuid": "2f06cac0_85ab5e5c",
+      "range": {
+        "startLine": 50,
+        "startChar": 20,
+        "endLine": 50,
+        "endChar": 48
+      },
+      "revId": "9a0c906a824c9f18ae7c5bec4480f3bbc992aadd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
