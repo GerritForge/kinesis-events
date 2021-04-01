@@ -67,7 +67,7 @@ class KinesisBrokerApi implements BrokerApi {
 
   @Override
   public void disconnect() {
-    consumers.forEach(KinesisConsumer::shutdown);
+    consumers.parallelStream().forEach(KinesisConsumer::shutdown);
     consumers.clear();
   }
 
