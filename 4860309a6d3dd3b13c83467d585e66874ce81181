@@ -142,6 +142,30 @@
       },
       "revId": "4860309a6d3dd3b13c83467d585e66874ce81181",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c193886_3a789a12",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-01T10:27:47Z",
+      "side": 1,
+      "message": "\u003e \u003e We are testing that when when the kinesis broker sends messages, temporary failures will be retried: the fact we are using KPL to achieve that it\u0027s an implementation detail.\n\u003e \n\u003e If that\u0027s the case you can mock kinesis producer and check if you code behaves as expected when retries occurred.\n\nBut I don\u0027t want to test that my code behaves correctly when retries occurred (perhaps that\u0027s a different test). I want to test that retries do occur.\n\nWhat I am arguing is that achieving this by using using KPL behind the scenes or anything else doesn\u0027t matter: I want an integration test that will break if tomorrow *any implementation* stops retrying.\n\n\u003e And if we set all necessary setting for the retries. In that case we are testing if our code does what\u0027s expected and we are not testing the aws local environment framework retires functionality because we can expect that code provided by amazon works(not necessary true if you look for pubsub emulator ;-) ).\n\nAgain, I don\u0027t think we are testing KPL, the integration test does not even know that KPL runs.\n(actually, it *would* know if we mocked it explicitly, like you suggested).\n\nPerhaps I am not understanding your point 100%, could you please outline a draft of how you imagine this test to be? I am happy to have a quick call if that helps.",
+      "parentUuid": "e78f2db3_0f422684",
+      "range": {
+        "startLine": 142,
+        "startChar": 1,
+        "endLine": 142,
+        "endChar": 79
+      },
+      "revId": "4860309a6d3dd3b13c83467d585e66874ce81181",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
