@@ -76,6 +76,11 @@ The kinesis-events plugin is configured by adding a plugin stanza in the
   If it goes over, the request will be timed-out and not attempted again.
   Default: 6000
 
+`plugin.kinesis-events.shutdownTimeoutMs`
+: Optional. The maximum total time (milliseconds) waiting when shutting down
+  kinesis consumers.
+  Default: 20000
+
 Overrides
 =========================
 
