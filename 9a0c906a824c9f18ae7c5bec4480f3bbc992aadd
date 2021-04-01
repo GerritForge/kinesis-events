@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a04147d5_d7bf7694",
+        "filename": "external_plugin_deps.bzl",
+        "patchSetId": 8
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-01T07:36:20Z",
+      "side": 1,
+      "message": "ok let me see if I can downgrade to something that uses 2.4",
+      "parentUuid": "aa042d8e_bd39fad4",
+      "range": {
+        "startLine": 196,
+        "startChar": 41,
+        "endLine": 196,
+        "endChar": 46
+      },
+      "revId": "9a0c906a824c9f18ae7c5bec4480f3bbc992aadd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f35c49f3_b0cf826d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisProducerProvider.java",
         "patchSetId": 8
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fda7e79e_d516422c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisProducerProvider.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-01T07:36:20Z",
+      "side": 1,
+      "message": "This is described as:\n\n# Maximum number of connections to open to the backend. HTTP requests are\n# sent in parallel over multiple connections.\n\nBasically this allows requests to be sent to AWS in parallel over multiple connections. I thought this was unnecessary for the throughput of Gerrit events and unpredictable when trying to assure ordering.\n\nIf you think this should be made configurable we could open a follow up ticket, but we should be doing some deeper testing to understand the consequences of ingesting events in parallel.\n\nWDYT?\n\nhttps://github.com/awslabs/amazon-kinesis-producer/blob/master/java/amazon-kinesis-producer-sample/default_config.properties#L107",
+      "parentUuid": "f35c49f3_b0cf826d",
+      "range": {
+        "startLine": 38,
+        "startChar": 12,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "9a0c906a824c9f18ae7c5bec4480f3bbc992aadd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61141e00_7ea89d1e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisProducerProvider.java",
         "patchSetId": 8
@@ -60,6 +108,30 @@
       "writtenOn": "2021-03-31T23:29:18Z",
       "side": 1,
       "message": "Disabling SSL X.509 Validation here? Why? Wouldn\u0027t this expose a main-in-the-middle vulnerability?",
+      "range": {
+        "startLine": 50,
+        "startChar": 20,
+        "endLine": 50,
+        "endChar": 48
+      },
+      "revId": "9a0c906a824c9f18ae7c5bec4480f3bbc992aadd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f06cac0_85ab5e5c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisProducerProvider.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-01T07:36:20Z",
+      "side": 1,
+      "message": "It would not expose it because this is only used when overriding the official AWS endpoint to connect locally (aka localstack) rather than public AWS endpoints.\n\nIt is due to two factors:\n- TLS cannot be deactivated for KPL ([1])\n- When USE_SSL flag is passed, localstack uses locally generated certificates, so SSL has to be disabled.\n\n[1]https://github.com/awslabs/amazon-kinesis-producer/blob/master/java/amazon-kinesis-producer/src/main/java/com/amazonaws/services/kinesis/producer/KinesisProducerConfiguration.java#L427",
+      "parentUuid": "61141e00_7ea89d1e",
       "range": {
         "startLine": 50,
         "startChar": 20,
