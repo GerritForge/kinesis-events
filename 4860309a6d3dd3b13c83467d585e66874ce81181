@@ -118,6 +118,30 @@
       },
       "revId": "4860309a6d3dd3b13c83467d585e66874ce81181",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e78f2db3_0f422684",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-04-01T09:33:17Z",
+      "side": 1,
+      "message": "\u003e We are testing that when when the kinesis broker sends messages, temporary failures will be retried: the fact we are using KPL to achieve that it\u0027s an implementation detail.\n\nIf that\u0027s the case you can mock kinesis producer and check if you code behaves as expected when retries occurred. And if we set all necessary setting for the retries. In that case we are testing if our code does what\u0027s expected and we are not testing the aws local environment framework retires functionality because we can expect that code provided by amazon works(not necessary true if you look for pubsub emulator ;-) ).",
+      "parentUuid": "ec5dafed_51005bb0",
+      "range": {
+        "startLine": 142,
+        "startChar": 1,
+        "endLine": 142,
+        "endChar": 79
+      },
+      "revId": "4860309a6d3dd3b13c83467d585e66874ce81181",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
