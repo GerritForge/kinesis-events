@@ -36,6 +36,7 @@ class KinesisConfiguration {
   private static final Integer DEFAULT_MAX_RECORDS = 100;
   private static final Long DEFAULT_PUBLISH_SINGLE_REQUEST_TIMEOUT_MS = 6000L;
   private static final Long DEFAULT_PUBLISH_TIMEOUT_MS = 6000L;
+  private static final Long DEFAULT_SHUTDOWN_TIMEOUT_MS = 20000L;
 
   private final String applicationName;
   private final String streamEventsTopic;
@@ -47,6 +48,7 @@ class KinesisConfiguration {
   private final Integer maxRecords;
   private final Long publishTimeoutMs;
   private final Long publishSingleRequestTimeoutMs;
+  private final Long shutdownTimeoutMs;
 
   @Inject
   public KinesisConfiguration(PluginConfigFactory configFactory, @PluginName String pluginName) {
@@ -85,6 +87,11 @@ class KinesisConfiguration {
         Optional.ofNullable(getStringParam(pluginConfig, "publishTimeoutMs", null))
             .map(Long::parseLong)
             .orElse(DEFAULT_PUBLISH_TIMEOUT_MS);
+
+    this.shutdownTimeoutMs =
+        Optional.ofNullable(getStringParam(pluginConfig, "shutdownTimeoutMs", null))
+            .map(Long::parseLong)
+            .orElse(DEFAULT_SHUTDOWN_TIMEOUT_MS);
 
     logger.atInfo().log(
         "Kinesis client. Application:'%s'|PollingInterval: %s|maxRecords: %s%s%s",
@@ -144,5 +151,9 @@ class KinesisConfiguration {
 
   public static String cosumerLeaseName(String applicationName, String streamName) {
     return String.format("%s-%s", applicationName, streamName);
+  }
+
+  public Long getShutdownTimeoutMs() {
+    return shutdownTimeoutMs;
   }
 }

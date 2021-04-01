@@ -32,6 +32,7 @@ class KinesisConsumer {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private final SchedulerProvider.Factory schedulerFactory;
   private final CheckpointResetter checkpointResetter;
+  private final KinesisConfiguration kinesisConfiguration;
   private final ExecutorService executor;
   private Scheduler kinesisScheduler;
 
@@ -43,9 +44,11 @@ class KinesisConsumer {
   public KinesisConsumer(
       SchedulerProvider.Factory schedulerFactory,
       CheckpointResetter checkpointResetter,
+      KinesisConfiguration kinesisConfiguration,
       @ConsumerExecutor ExecutorService executor) {
     this.schedulerFactory = schedulerFactory;
     this.checkpointResetter = checkpointResetter;
+    this.kinesisConfiguration = kinesisConfiguration;
     this.executor = executor;
   }
 
@@ -66,14 +69,17 @@ class KinesisConsumer {
 
   public void shutdown() {
     Future<Boolean> gracefulShutdownFuture = kinesisScheduler.startGracefulShutdown();
-    logger.atInfo().log("Waiting up to %s seconds for shutdown to complete.");
+    logger.atInfo().log(
+        "Waiting up to '%s' milliseconds to complete shutdown of kinesis consumer of stream '%s'",
+        kinesisConfiguration.getShutdownTimeoutMs(), getStreamName());
     try {
-      gracefulShutdownFuture.get(20, TimeUnit.SECONDS);
+      gracefulShutdownFuture.get(
+          kinesisConfiguration.getShutdownTimeoutMs(), TimeUnit.MILLISECONDS);
     } catch (Exception e) {
       logger.atSevere().withCause(e).log(
           "Error caught when shutting down kinesis consumer for stream %s", getStreamName());
     }
-    logger.atInfo().log("Completed, shutting down now.");
+    logger.atInfo().log("Shutdown kinesis consumer of stream %s completed.", getStreamName());
   }
 
   public java.util.function.Consumer<EventMessage> getMessageProcessor() {
