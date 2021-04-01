@@ -166,6 +166,30 @@
       },
       "revId": "4860309a6d3dd3b13c83467d585e66874ce81181",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da76699f_46da8e8e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-04-01T11:36:18Z",
+      "side": 1,
+      "message": "After the long and heated discussion with @Tony 😄 I can give +2 but I\u0027m still not convinced that we should test it in that way. My final point is that it\u0027s similar to testing the database connection timeout. To do that we will not setup full Postgres and do some magic to try to force database to throw connection timeout. We will just mock the connection and simulate timeout.",
+      "parentUuid": "9c193886_3a789a12",
+      "range": {
+        "startLine": 142,
+        "startChar": 1,
+        "endLine": 142,
+        "endChar": 79
+      },
+      "revId": "4860309a6d3dd3b13c83467d585e66874ce81181",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
