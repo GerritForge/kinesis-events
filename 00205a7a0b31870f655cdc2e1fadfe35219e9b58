@@ -22,6 +22,30 @@
       },
       "revId": "00205a7a0b31870f655cdc2e1fadfe35219e9b58",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f3ff9fe_a1a0ef77",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-02T09:24:29Z",
+      "side": 1,
+      "message": "Yep it will try to connect to the unexisting stream until it timesout.\n\njava.util.concurrent.TimeoutException: Waited 6000 milliseconds (plus 4 milliseconds, 541868 nanoseconds delay) for com.google.common.util.concurrent.SettableFuture@4746b5d[status\u003dPENDING]",
+      "parentUuid": "7fea3d36_2d12de3e",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 46
+      },
+      "revId": "00205a7a0b31870f655cdc2e1fadfe35219e9b58",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
