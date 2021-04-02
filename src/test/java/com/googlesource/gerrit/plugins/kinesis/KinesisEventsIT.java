@@ -76,6 +76,12 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
     System.setProperty("endpoint", localstack.getEndpointOverride(KINESIS).toASCIIString());
     System.setProperty("region", localstack.getRegion());
     System.setProperty("aws.accessKeyId", localstack.getAccessKey());
+
+    // The secret key property name has changed from aws-sdk 1.11.x and 2.x [1]
+    // Export both names so that default credential provider chains work for both
+    // Kinesis Consumer Library (uses V2) and Kinesis Producer Library (uses v1)
+    // [1]  https://docs.aws.amazon.com/sdk-for-java/latest/migration-guide/client-credential.html
+    System.setProperty("aws.secretKey", localstack.getSecretKey());
     System.setProperty("aws.secretAccessKey", localstack.getSecretKey());
 
     super.setUpTestPlugin();
