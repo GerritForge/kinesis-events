@@ -137,7 +137,7 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
   @Test
   @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
   @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
-  @GerritConfig(name = "plugin.kinesis-events.publishTimeoutMs", value = "1000")
+  @GerritConfig(name = "plugin.kinesis-events.publishTimeoutMs", value = "10000")
   public void shouldRetryUntilSuccessful() {
     String streamName = UUID.randomUUID().toString();
     createStreamAsync(streamName);
@@ -150,10 +150,8 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
   @Test
   @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
   @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
-  @GerritConfig(name = "plugin.kinesis-events.publishTimeoutMs", value = "200")
-  public void shouldGiveUpWhenTimingOut() {
-    String streamName = UUID.randomUUID().toString();
-    createStreamAsync(streamName);
+  public void shouldBeUnsuccessfulWhenTimingOut() {
+    String streamName = "not-existing-stream";
 
     PublishResult publishResult = kinesisBroker().sendWithResult(streamName, eventMessage());
     assertThat(publishResult.isSuccess()).isFalse();
