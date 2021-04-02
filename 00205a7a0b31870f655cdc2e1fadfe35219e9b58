@@ -46,6 +46,30 @@
       },
       "revId": "00205a7a0b31870f655cdc2e1fadfe35219e9b58",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de746501_5d86d0f5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-04-02T09:25:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6f3ff9fe_a1a0ef77",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 46
+      },
+      "revId": "00205a7a0b31870f655cdc2e1fadfe35219e9b58",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
