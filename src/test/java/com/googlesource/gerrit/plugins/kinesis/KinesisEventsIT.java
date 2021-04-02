@@ -134,28 +134,28 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
         .isEqualTo(event.getHeader().eventId);
   }
 
-  @Test
-  @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
-  @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
-  @GerritConfig(name = "plugin.kinesis-events.publishTimeoutMs", value = "10000")
-  public void shouldRetryUntilSuccessful() {
-    String streamName = UUID.randomUUID().toString();
-    createStreamAsync(streamName);
-
-    PublishResult publishResult = kinesisBroker().sendWithResult(streamName, eventMessage());
-    assertThat(publishResult.isSuccess()).isTrue();
-    assertThat(publishResult.attempts()).isGreaterThan(1);
-  }
-
-  @Test
-  @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
-  @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
-  public void shouldBeUnsuccessfulWhenTimingOut() {
-    String streamName = "not-existing-stream";
-
-    PublishResult publishResult = kinesisBroker().sendWithResult(streamName, eventMessage());
-    assertThat(publishResult.isSuccess()).isFalse();
-  }
+//  @Test
+//  @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
+//  @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
+//  @GerritConfig(name = "plugin.kinesis-events.publishTimeoutMs", value = "10000")
+//  public void shouldRetryUntilSuccessful() {
+//    String streamName = UUID.randomUUID().toString();
+//    createStreamAsync(streamName);
+//
+//    PublishResult publishResult = kinesisBroker().sendWithResult(streamName, eventMessage());
+//    assertThat(publishResult.isSuccess()).isTrue();
+//    assertThat(publishResult.attempts()).isGreaterThan(1);
+//  }
+//
+//  @Test
+//  @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
+//  @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
+//  public void shouldBeUnsuccessfulWhenTimingOut() {
+//    String streamName = "not-existing-stream";
+//
+//    PublishResult publishResult = kinesisBroker().sendWithResult(streamName, eventMessage());
+//    assertThat(publishResult.isSuccess()).isFalse();
+//  }
 
   public KinesisBrokerApi kinesisBroker() {
     return (KinesisBrokerApi) plugin.getSysInjector().getInstance(BrokerApi.class);
