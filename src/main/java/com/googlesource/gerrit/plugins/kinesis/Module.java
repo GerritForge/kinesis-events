@@ -38,8 +38,13 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 import software.amazon.awssdk.services.kinesis.KinesisAsyncClient;
 
 public class Module extends LifecycleModule {
-
+  private final AWSLogLevelModule awsLogLevelModule;
   private Set<TopicSubscriber> activeConsumers = Sets.newHashSet();
+
+  @Inject
+  Module(AWSLogLevelModule awsLogLevelModule) {
+    this.awsLogLevelModule = awsLogLevelModule;
+  }
 
   /**
    * By default the events-broker library (loaded directly by the multi-site) registers a noop
@@ -60,6 +65,7 @@ public class Module extends LifecycleModule {
 
   @Override
   protected void configure() {
+    install(awsLogLevelModule);
     factory(KinesisRecordProcessor.Factory.class);
     factory(KinesisRecordProcessorFactory.Factory.class);
     bind(ExecutorService.class)
