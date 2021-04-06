@@ -38,7 +38,6 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 import software.amazon.awssdk.services.kinesis.KinesisAsyncClient;
 
 public class Module extends LifecycleModule {
-
   private Set<TopicSubscriber> activeConsumers = Sets.newHashSet();
 
   /**
@@ -77,5 +76,6 @@ public class Module extends LifecycleModule {
     DynamicSet.bind(binder(), LifecycleListener.class).to(KinesisBrokerLifeCycleManager.class);
     factory(KinesisConsumer.Factory.class);
     DynamicSet.bind(binder(), EventListener.class).to(KinesisPublisher.class);
+    listener().to(AWSLogLevelListener.class);
   }
 }

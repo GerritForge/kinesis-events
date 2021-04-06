@@ -81,6 +81,16 @@ The kinesis-events plugin is configured by adding a plugin stanza in the
   kinesis consumers.
   Default: 20000
 
+`plugin.kinesis-events.awsLibLogLevel`
+: Optional. Which level AWS libraries should log at.
+  This plugin delegates most complex tasks associated to the production and
+  consumption of data to libraries developed and maintained directly by AWS.
+  This configuration specifies how verbose those libraries are allowed to be when
+  logging.
+
+  Default: WARN
+  Allowed values:OFF|FATAL|ERROR|WARN|INFO|DEBUG|TRACE|ALL
+
 Overrides
 =========================
 

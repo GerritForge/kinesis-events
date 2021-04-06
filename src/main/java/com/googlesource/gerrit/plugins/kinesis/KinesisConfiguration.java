@@ -23,6 +23,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.net.URI;
 import java.util.Optional;
+import org.apache.log4j.Level;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.kinesis.common.InitialPositionInStream;
 
@@ -37,6 +38,7 @@ class KinesisConfiguration {
   private static final Long DEFAULT_PUBLISH_SINGLE_REQUEST_TIMEOUT_MS = 6000L;
   private static final Long DEFAULT_PUBLISH_TIMEOUT_MS = 6000L;
   private static final Long DEFAULT_SHUTDOWN_TIMEOUT_MS = 20000L;
+  private static final Level DEFAULT_AWS_LIB_LOG_LEVEL = Level.WARN;
 
   private final String applicationName;
   private final String streamEventsTopic;
@@ -49,6 +51,7 @@ class KinesisConfiguration {
   private final Long publishTimeoutMs;
   private final Long publishSingleRequestTimeoutMs;
   private final Long shutdownTimeoutMs;
+  private final Level awsLibLogLevel;
 
   @Inject
   public KinesisConfiguration(PluginConfigFactory configFactory, @PluginName String pluginName) {
@@ -92,6 +95,11 @@ class KinesisConfiguration {
         Optional.ofNullable(getStringParam(pluginConfig, "shutdownTimeoutMs", null))
             .map(Long::parseLong)
             .orElse(DEFAULT_SHUTDOWN_TIMEOUT_MS);
+
+    this.awsLibLogLevel =
+        Optional.ofNullable(getStringParam(pluginConfig, "awsLibLogLevel", null))
+            .map(l -> Level.toLevel(l, DEFAULT_AWS_LIB_LOG_LEVEL))
+            .orElse(DEFAULT_AWS_LIB_LOG_LEVEL);
 
     logger.atInfo().log(
         "Kinesis client. Application:'%s'|PollingInterval: %s|maxRecords: %s%s%s",
@@ -155,5 +163,9 @@ class KinesisConfiguration {
 
   public Long getShutdownTimeoutMs() {
     return shutdownTimeoutMs;
+  }
+
+  public Level getAwsLibLogLevel() {
+    return awsLibLogLevel;
   }
 }
