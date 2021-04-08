@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2644fea_ac5cac29",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/CloudWatchAsyncClientProvider.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-08T19:55:18Z",
+      "side": 1,
+      "message": "Same comment as DynamoDbAsyncClientProvider",
+      "range": {
+        "startLine": 25,
+        "startChar": 16,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7515ac2_4d643457",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/DynamoDbAsyncClientProvider.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-08T19:55:18Z",
+      "side": 1,
+      "message": "Do we need the whole Kinesis configuration? Or the region and endpoint would do it? I just found a bit strange having the KinesisConfiguration in the DynamoDBClientProvider constructor.",
+      "range": {
+        "startLine": 25,
+        "startChar": 16,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78083782_441d1340",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/SchedulerProvider.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-08T19:55:18Z",
+      "side": 1,
+      "message": "Is this meant to be part of this change? in the change description we only talk about \"Narrowing responsibility of KinesisConfiguration\". Why do we need to introduce this SchedulerProvider ?",
+      "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
