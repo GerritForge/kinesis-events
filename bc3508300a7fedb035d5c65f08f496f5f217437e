@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "553d9039_58dd9d16",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/CloudWatchAsyncClientProvider.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-09T07:42:31Z",
+      "side": 1,
+      "message": "See my previous reply.",
+      "parentUuid": "e2644fea_ac5cac29",
+      "range": {
+        "startLine": 25,
+        "startChar": 16,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7515ac2_4d643457",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/DynamoDbAsyncClientProvider.java",
         "patchSetId": 10
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de470a3f_21ad6508",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/DynamoDbAsyncClientProvider.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-09T07:42:31Z",
+      "side": 1,
+      "message": "KinesisConfiguration is not the configuration specific to \"kinesis\", but the configuration of the kinesis-events plugin.\n\nIf it\u0027s confusing perhaps we should change its name to \"Configuration\" or \"KinesisEventsConfiguration\" or something else?\n\nWDYT?",
+      "parentUuid": "e7515ac2_4d643457",
+      "range": {
+        "startLine": 25,
+        "startChar": 16,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78083782_441d1340",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/SchedulerProvider.java",
         "patchSetId": 10
@@ -60,6 +108,24 @@
       "writtenOn": "2021-04-08T19:55:18Z",
       "side": 1,
       "message": "Is this meant to be part of this change? in the change description we only talk about \"Narrowing responsibility of KinesisConfiguration\". Why do we need to introduce this SchedulerProvider ?",
+      "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fdc6bbc_f3d917f9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/SchedulerProvider.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-09T07:42:31Z",
+      "side": 1,
+      "message": "Yep, it is a consequence of this change, for two reasons:\n\n- The KinesisConfiguration used to build ConfigsBuilder, which is not, strictly speaking a configuration coming from file, and thus, goes beyond the responsibility of the module.\n\n- Since the ConfigsBuilder needs the various clients to be built and, on cascade, the various clients need the KinesisConfiguration to be built, the logic to build ConfigsBuilder has to be moved elsewhere to avoid circular dependencies with KinesisConfiguration.\n\nHope it makes sense",
+      "parentUuid": "78083782_441d1340",
       "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
