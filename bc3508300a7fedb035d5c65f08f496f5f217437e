@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "801ef70d_a9474819",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/DynamoDbAsyncClientProvider.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-09T19:21:36Z",
+      "side": 1,
+      "message": "Aaa ok, I didn\u0027t get it was the configuration of the whole plugin. If it is not big deal, maybe calling it just Configuration would do it....even in a follow up change.",
+      "parentUuid": "de470a3f_21ad6508",
+      "range": {
+        "startLine": 25,
+        "startChar": 16,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78083782_441d1340",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/SchedulerProvider.java",
         "patchSetId": 10
@@ -126,6 +150,24 @@
       "side": 1,
       "message": "Yep, it is a consequence of this change, for two reasons:\n\n- The KinesisConfiguration used to build ConfigsBuilder, which is not, strictly speaking a configuration coming from file, and thus, goes beyond the responsibility of the module.\n\n- Since the ConfigsBuilder needs the various clients to be built and, on cascade, the various clients need the KinesisConfiguration to be built, the logic to build ConfigsBuilder has to be moved elsewhere to avoid circular dependencies with KinesisConfiguration.\n\nHope it makes sense",
       "parentUuid": "78083782_441d1340",
+      "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fbfb479_a6ec3513",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/SchedulerProvider.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-09T19:21:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9fdc6bbc_f3d917f9",
       "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
