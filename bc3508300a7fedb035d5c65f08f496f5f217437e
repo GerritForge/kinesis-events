@@ -48,6 +48,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8baf6907_fd33067d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/CloudWatchAsyncClientProvider.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-11T10:53:47Z",
+      "side": 1,
+      "message": "Done in a followup change.",
+      "parentUuid": "553d9039_58dd9d16",
+      "range": {
+        "startLine": 25,
+        "startChar": 16,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7515ac2_4d643457",
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "Aaa ok, I didn\u0027t get it was the configuration of the whole plugin. If it is not big deal, maybe calling it just Configuration would do it....even in a follow up change.",
       "parentUuid": "de470a3f_21ad6508",
+      "range": {
+        "startLine": 25,
+        "startChar": 16,
+        "endLine": 25,
+        "endChar": 36
+      },
+      "revId": "bc3508300a7fedb035d5c65f08f496f5f217437e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d5383b_486d91a0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/DynamoDbAsyncClientProvider.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-11T10:53:47Z",
+      "side": 1,
+      "message": "Done in a followup change.",
+      "parentUuid": "801ef70d_a9474819",
       "range": {
         "startLine": 25,
         "startChar": 16,
