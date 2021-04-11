@@ -14,7 +14,7 @@
 
 package com.googlesource.gerrit.plugins.kinesis;
 
-import static com.googlesource.gerrit.plugins.kinesis.KinesisConfiguration.cosumerLeaseName;
+import static com.googlesource.gerrit.plugins.kinesis.Configuration.cosumerLeaseName;
 
 import com.gerritforge.gerrit.eventbroker.EventMessage;
 import com.google.inject.Provider;
@@ -39,14 +39,14 @@ class SchedulerProvider implements Provider<Scheduler> {
   }
 
   private final ConfigsBuilder configsBuilder;
-  private final KinesisConfiguration kinesisConfiguration;
+  private final Configuration configuration;
   private final KinesisAsyncClient kinesisAsyncClient;
   private final String streamName;
   private final boolean fromBeginning;
 
   @AssistedInject
   SchedulerProvider(
-      KinesisConfiguration kinesisConfiguration,
+      Configuration configuration,
       KinesisAsyncClient kinesisAsyncClient,
       DynamoDbAsyncClient dynamoDbAsyncClient,
       CloudWatchAsyncClient cloudWatchAsyncClient,
@@ -54,34 +54,33 @@ class SchedulerProvider implements Provider<Scheduler> {
       @Assisted String streamName,
       @Assisted boolean fromBeginning,
       @Assisted java.util.function.Consumer<EventMessage> messageProcessor) {
-    this.kinesisConfiguration = kinesisConfiguration;
+    this.configuration = configuration;
     this.kinesisAsyncClient = kinesisAsyncClient;
     this.streamName = streamName;
     this.fromBeginning = fromBeginning;
     this.configsBuilder =
         new ConfigsBuilder(
             streamName,
-            cosumerLeaseName(kinesisConfiguration.getApplicationName(), streamName),
+            cosumerLeaseName(configuration.getApplicationName(), streamName),
             kinesisAsyncClient,
             dynamoDbAsyncClient,
             cloudWatchAsyncClient,
-            String.format(
-                "klc-worker-%s-%s", kinesisConfiguration.getApplicationName(), streamName),
+            String.format("klc-worker-%s-%s", configuration.getApplicationName(), streamName),
             kinesisRecordProcessorFactory.create(messageProcessor));
   }
 
   private RetrievalConfig getRetrievalConfig() {
     PollingConfig polling =
         new PollingConfig(streamName, kinesisAsyncClient)
-            .idleTimeBetweenReadsInMillis(kinesisConfiguration.getPollingIntervalMs())
-            .maxRecords(kinesisConfiguration.getMaxRecords());
+            .idleTimeBetweenReadsInMillis(configuration.getPollingIntervalMs())
+            .maxRecords(configuration.getMaxRecords());
     RetrievalConfig retrievalConfig =
         configsBuilder.retrievalConfig().retrievalSpecificConfig(polling);
     retrievalConfig.initialPositionInStreamExtended(
         InitialPositionInStreamExtended.newInitialPosition(
             fromBeginning
                 ? InitialPositionInStream.TRIM_HORIZON
-                : kinesisConfiguration.getInitialPosition()));
+                : configuration.getInitialPosition()));
     return retrievalConfig;
   }
 

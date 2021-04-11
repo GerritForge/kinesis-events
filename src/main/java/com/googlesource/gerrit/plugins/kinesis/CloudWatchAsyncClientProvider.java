@@ -22,18 +22,18 @@ import software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClientBuilder;
 
 @Singleton
 class CloudWatchAsyncClientProvider implements Provider<CloudWatchAsyncClient> {
-  private final KinesisConfiguration kinesisConfiguration;
+  private final Configuration configuration;
 
   @Inject
-  CloudWatchAsyncClientProvider(KinesisConfiguration kinesisConfiguration) {
-    this.kinesisConfiguration = kinesisConfiguration;
+  CloudWatchAsyncClientProvider(Configuration configuration) {
+    this.configuration = configuration;
   }
 
   @Override
   public CloudWatchAsyncClient get() {
     CloudWatchAsyncClientBuilder builder = CloudWatchAsyncClient.builder();
-    kinesisConfiguration.getRegion().ifPresent(builder::region);
-    kinesisConfiguration.getEndpoint().ifPresent(builder::endpointOverride);
+    configuration.getRegion().ifPresent(builder::region);
+    configuration.getEndpoint().ifPresent(builder::endpointOverride);
 
     return builder.build();
   }

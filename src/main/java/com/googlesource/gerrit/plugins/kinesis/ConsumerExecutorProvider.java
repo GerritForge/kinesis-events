@@ -21,10 +21,10 @@ import java.util.concurrent.ExecutorService;
 
 class ConsumerExecutorProvider implements Provider<ExecutorService> {
   private final WorkQueue workQueue;
-  private final KinesisConfiguration configuration;
+  private final Configuration configuration;
 
   @Inject
-  ConsumerExecutorProvider(WorkQueue workQueue, KinesisConfiguration configuration) {
+  ConsumerExecutorProvider(WorkQueue workQueue, Configuration configuration) {
     this.workQueue = workQueue;
     this.configuration = configuration;
   }

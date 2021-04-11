@@ -24,11 +24,11 @@ import com.google.inject.Singleton;
 @Singleton
 public class KinesisProducerProvider implements Provider<KinesisProducer> {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-  private final KinesisConfiguration kinesisConfiguration;
+  private final Configuration configuration;
 
   @Inject
-  KinesisProducerProvider(KinesisConfiguration kinesisConfiguration) {
-    this.kinesisConfiguration = kinesisConfiguration;
+  KinesisProducerProvider(Configuration configuration) {
+    this.configuration = configuration;
   }
 
   @Override
@@ -37,10 +37,10 @@ public class KinesisProducerProvider implements Provider<KinesisProducer> {
         new KinesisProducerConfiguration()
             .setAggregationEnabled(false)
             .setMaxConnections(1)
-            .setRequestTimeout(kinesisConfiguration.getPublishSingleRequestTimeoutMs());
+            .setRequestTimeout(configuration.getPublishSingleRequestTimeoutMs());
 
-    kinesisConfiguration.getRegion().ifPresent(r -> conf.setRegion(r.toString()));
-    kinesisConfiguration
+    configuration.getRegion().ifPresent(r -> conf.setRegion(r.toString()));
+    configuration
         .getEndpoint()
         .ifPresent(
             uri ->
@@ -51,12 +51,9 @@ public class KinesisProducerProvider implements Provider<KinesisProducer> {
                     .setVerifyCertificate(false));
     logger.atInfo().log(
         "Kinesis producer configured. Request Timeout (ms):'%s'%s%s",
-        kinesisConfiguration.getPublishSingleRequestTimeoutMs(),
-        kinesisConfiguration
-            .getRegion()
-            .map(r -> String.format("|region: '%s'", r.id()))
-            .orElse(""),
-        kinesisConfiguration
+        configuration.getPublishSingleRequestTimeoutMs(),
+        configuration.getRegion().map(r -> String.format("|region: '%s'", r.id())).orElse(""),
+        configuration
             .getEndpoint()
             .map(e -> String.format("|endpoint: '%s'", e.toASCIIString()))
             .orElse(""));

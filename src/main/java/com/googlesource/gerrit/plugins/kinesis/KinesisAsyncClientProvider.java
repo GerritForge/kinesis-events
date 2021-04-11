@@ -23,18 +23,18 @@ import software.amazon.kinesis.common.KinesisClientUtil;
 
 @Singleton
 class KinesisAsyncClientProvider implements Provider<KinesisAsyncClient> {
-  private final KinesisConfiguration kinesisConfiguration;
+  private final Configuration configuration;
 
   @Inject
-  KinesisAsyncClientProvider(KinesisConfiguration kinesisConfiguration) {
-    this.kinesisConfiguration = kinesisConfiguration;
+  KinesisAsyncClientProvider(Configuration configuration) {
+    this.configuration = configuration;
   }
 
   @Override
   public KinesisAsyncClient get() {
     KinesisAsyncClientBuilder builder = KinesisAsyncClient.builder();
-    kinesisConfiguration.getRegion().ifPresent(builder::region);
-    kinesisConfiguration.getEndpoint().ifPresent(builder::endpointOverride);
+    configuration.getRegion().ifPresent(builder::region);
+    configuration.getEndpoint().ifPresent(builder::endpointOverride);
 
     return KinesisClientUtil.createKinesisAsyncClient(builder);
   }

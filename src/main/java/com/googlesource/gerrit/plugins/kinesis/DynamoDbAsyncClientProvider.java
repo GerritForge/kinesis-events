@@ -22,18 +22,18 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClientBuilder;
 
 @Singleton
 class DynamoDbAsyncClientProvider implements Provider<DynamoDbAsyncClient> {
-  private final KinesisConfiguration kinesisConfiguration;
+  private final Configuration configuration;
 
   @Inject
-  DynamoDbAsyncClientProvider(KinesisConfiguration kinesisConfiguration) {
-    this.kinesisConfiguration = kinesisConfiguration;
+  DynamoDbAsyncClientProvider(Configuration configuration) {
+    this.configuration = configuration;
   }
 
   @Override
   public DynamoDbAsyncClient get() {
     DynamoDbAsyncClientBuilder builder = DynamoDbAsyncClient.builder();
-    kinesisConfiguration.getRegion().ifPresent(builder::region);
-    kinesisConfiguration.getEndpoint().ifPresent(builder::endpointOverride);
+    configuration.getRegion().ifPresent(builder::region);
+    configuration.getEndpoint().ifPresent(builder::endpointOverride);
 
     return builder.build();
   }
