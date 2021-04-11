@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75e0c94c_3de52f5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-11T10:56:27Z",
+      "side": 1,
+      "message": "@ponch\nFollowup change resulting from code review comments on change 513856",
+      "revId": "7f5516c5ec5268bb91969cfcad40b863ce954ce6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
