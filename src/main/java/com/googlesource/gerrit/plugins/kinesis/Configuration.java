@@ -28,7 +28,7 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.kinesis.common.InitialPositionInStream;
 
 @Singleton
-class KinesisConfiguration {
+class Configuration {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private static final String DEFAULT_NUMBER_OF_SUBSCRIBERS = "6";
   private static final String DEFAULT_STREAM_EVENTS_TOPIC = "gerrit";
@@ -54,7 +54,7 @@ class KinesisConfiguration {
   private final Level awsLibLogLevel;
 
   @Inject
-  public KinesisConfiguration(PluginConfigFactory configFactory, @PluginName String pluginName) {
+  public Configuration(PluginConfigFactory configFactory, @PluginName String pluginName) {
     PluginConfig pluginConfig = configFactory.getFromGerritConfig(pluginName);
 
     this.region = Optional.ofNullable(getStringParam(pluginConfig, "region", null)).map(Region::of);

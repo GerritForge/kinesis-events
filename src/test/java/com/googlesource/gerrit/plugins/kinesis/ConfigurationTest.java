@@ -28,7 +28,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class KinesisConfigurationTest {
+public class ConfigurationTest {
   private static final String PLUGIN_NAME = "kinesis-events";
 
   @Mock private PluginConfigFactory pluginConfigFactoryMock;
@@ -44,10 +44,9 @@ public class KinesisConfigurationTest {
     when(pluginConfigFactoryMock.getFromGerritConfig(PLUGIN_NAME))
         .thenReturn(pluginConfig.asPluginConfig());
 
-    KinesisConfiguration kinesisConfiguration =
-        new KinesisConfiguration(pluginConfigFactoryMock, PLUGIN_NAME);
+    Configuration configuration = new Configuration(pluginConfigFactoryMock, PLUGIN_NAME);
 
-    assertThat(kinesisConfiguration.getAwsLibLogLevel()).isEqualTo(Level.WARN);
+    assertThat(configuration.getAwsLibLogLevel()).isEqualTo(Level.WARN);
   }
 
   @Test
@@ -56,10 +55,9 @@ public class KinesisConfigurationTest {
     when(pluginConfigFactoryMock.getFromGerritConfig(PLUGIN_NAME))
         .thenReturn(pluginConfig.asPluginConfig());
 
-    KinesisConfiguration kinesisConfiguration =
-        new KinesisConfiguration(pluginConfigFactoryMock, PLUGIN_NAME);
+    Configuration configuration = new Configuration(pluginConfigFactoryMock, PLUGIN_NAME);
 
-    assertThat(kinesisConfiguration.getAwsLibLogLevel()).isEqualTo(Level.DEBUG);
+    assertThat(configuration.getAwsLibLogLevel()).isEqualTo(Level.DEBUG);
   }
 
   @Test
@@ -68,9 +66,8 @@ public class KinesisConfigurationTest {
     when(pluginConfigFactoryMock.getFromGerritConfig(PLUGIN_NAME))
         .thenReturn(pluginConfig.asPluginConfig());
 
-    KinesisConfiguration kinesisConfiguration =
-        new KinesisConfiguration(pluginConfigFactoryMock, PLUGIN_NAME);
+    Configuration configuration = new Configuration(pluginConfigFactoryMock, PLUGIN_NAME);
 
-    assertThat(kinesisConfiguration.getAwsLibLogLevel()).isEqualTo(Level.WARN);
+    assertThat(configuration.getAwsLibLogLevel()).isEqualTo(Level.WARN);
   }
 }

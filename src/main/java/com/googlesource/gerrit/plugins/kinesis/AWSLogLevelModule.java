@@ -24,8 +24,8 @@ public class AWSLogLevelModule extends AbstractModule {
   private final Level awsLibLogLevel;
 
   @Inject
-  AWSLogLevelModule(KinesisConfiguration kinesisConfiguration) {
-    this.awsLibLogLevel = kinesisConfiguration.getAwsLibLogLevel();
+  AWSLogLevelModule(Configuration configuration) {
+    this.awsLibLogLevel = configuration.getAwsLibLogLevel();
   }
 
   @Override
