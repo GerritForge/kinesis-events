@@ -35,21 +35,20 @@ class KinesisPublisher implements EventListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final KinesisProducer kinesisProducer;
-  private final KinesisConfiguration kinesisConfiguration;
+  private final Configuration configuration;
 
   private final Gson gson;
 
   @Inject
-  public KinesisPublisher(
-      Gson gson, KinesisProducer kinesisProducer, KinesisConfiguration kinesisConfiguration) {
+  public KinesisPublisher(Gson gson, KinesisProducer kinesisProducer, Configuration configuration) {
     this.gson = gson;
     this.kinesisProducer = kinesisProducer;
-    this.kinesisConfiguration = kinesisConfiguration;
+    this.configuration = configuration;
   }
 
   @Override
   public void onEvent(Event event) {
-    publish(kinesisConfiguration.getStreamEventsTopic(), gson.toJson(event), event.getType());
+    publish(configuration.getStreamEventsTopic(), gson.toJson(event), event.getType());
   }
 
   public PublishResult publish(String streamName, String stringEvent, String partitionKey) {
@@ -62,7 +61,7 @@ class KinesisPublisher implements EventListener {
       result =
           kinesisProducer
               .addUserRecord(streamName, partitionKey, ByteBuffer.wrap(stringEvent.getBytes()))
-              .get(kinesisConfiguration.getPublishTimeoutMs(), TimeUnit.MILLISECONDS);
+              .get(configuration.getPublishTimeoutMs(), TimeUnit.MILLISECONDS);
 
       List<Attempt> attemptsDetails = result.getAttempts();
       int numberOfAttempts = attemptsDetails.size();

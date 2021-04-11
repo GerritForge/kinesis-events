@@ -24,8 +24,8 @@ public class AWSLogLevelListener implements LifecycleListener {
   private final Level awsLibLogLevel;
 
   @Inject
-  AWSLogLevelListener(KinesisConfiguration kinesisConfiguration) {
-    this.awsLibLogLevel = kinesisConfiguration.getAwsLibLogLevel();
+  AWSLogLevelListener(Configuration configuration) {
+    this.awsLibLogLevel = configuration.getAwsLibLogLevel();
   }
 
   @Override
