@@ -83,7 +83,7 @@ class KinesisConsumer {
 
   public void shutdown() {
     Future<Boolean> gracefulShutdownFuture = kinesisScheduler.startGracefulShutdown();
-    logger.atInfo().log("Waiting up to %s seconds for shutdown to complete.");
+    logger.atInfo().log("Waiting up to 20 seconds for shutdown to complete.");
     try {
       gracefulShutdownFuture.get(20, TimeUnit.SECONDS);
     } catch (Exception e) {
