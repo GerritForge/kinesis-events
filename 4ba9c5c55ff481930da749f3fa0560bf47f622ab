@@ -52,6 +52,23 @@
       "parentUuid": "9a55706b_af71c6be",
       "revId": "4ba9c5c55ff481930da749f3fa0560bf47f622ab",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28a52aac_3dca7f87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000177
+      },
+      "writtenOn": "2021-04-12T09:41:07Z",
+      "side": 1,
+      "message": "Verified that build works as expected.",
+      "revId": "4ba9c5c55ff481930da749f3fa0560bf47f622ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
