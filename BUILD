@@ -41,7 +41,7 @@ gerrit_plugin(
         "@awssdk-protocol-core//jar",
         "@awssdk-query-protocol//jar",
         "@commons-codec//jar",
-        "@events-broker//jar",
+        "@events-broker//jar:neverlink",
         "@io-netty-all//jar",
         "@jackson-annotations//jar",
         "@jackson-core//jar",
