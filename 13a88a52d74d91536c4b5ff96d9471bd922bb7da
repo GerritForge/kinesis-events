@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4823f6df_7e521dbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-12T08:32:00Z",
+      "side": 1,
+      "message": "@marcin, @ponch: rebasing this dropped your +2, could you please check again?\n\nThanks",
+      "revId": "13a88a52d74d91536c4b5ff96d9471bd922bb7da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
