@@ -16,6 +16,24 @@
       "message": "Can you explain why the change is necessary?",
       "revId": "4ba9c5c55ff481930da749f3fa0560bf47f622ab",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a55706b_af71c6be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000177
+      },
+      "writtenOn": "2021-04-12T09:22:57Z",
+      "side": 1,
+      "message": "\u003e Can you explain why the change is necessary?\n\nIsn\u0027t the commit message is explaining it already?\n\nWithout this change the plugin transitively depends on events-broker module and as the consequence, events-broker classes are included in the final plugin artifact:\n\n  $ unzip -t bazel-bin/plugins/kinesis-events/kinesis-events.jar | grep gerritforge\n    testing: com/gerritforge/         OK\n    testing: com/gerritforge/gerrit/   OK\n    testing: com/gerritforge/gerrit/eventbroker/   OK\n    testing: com/gerritforge/gerrit/eventbroker/EventGsonProvider$EventSerializer.class   OK\n    testing: com/gerritforge/gerrit/eventbroker/EventMessage$Header.class   OK\n    testing: com/gerritforge/gerrit/eventbroker/AutoValue_TopicSubscriber.class   OK\n    testing: com/gerritforge/gerrit/eventbroker/InProcessBrokerApi.class   OK\n    testing: com/gerritforge/gerrit/eventbroker/BrokerApiModule.class   OK\n    testing: com/gerritforge/gerrit/eventbroker/EventGsonProvider.class   OK\n    testing: com/gerritforge/gerrit/eventbroker/EventGsonProvider$ProjectNameKeyDeserializer.class   OK\n    testing: com/gerritforge/gerrit/eventbroker/TopicSubscriber.class   OK\n    testing: com/gerritforge/gerrit/eventbroker/EventMessage.class   OK\n    testing: com/gerritforge/gerrit/eventbroker/InProcessBrokerApi$EventBusMessageRecorder.class   OK\n    testing: com/gerritforge/gerrit/eventbroker/BrokerApi.class   OK\n    testing: META-INF/maven/com.gerritforge/   OK\n    testing: META-INF/maven/com.gerritforge/events-broker/   OK\n    testing: META-INF/maven/com.gerritforge/events-broker/pom.properties   OK\n    testing: META-INF/maven/com.gerritforge/events-broker/pom.xml   OK\n\nWith this change the classes are not shaded in final plugin artifact:\n\n  $ unzip -t bazel-bin/plugins/kinesis-events/kinesis-events.jar | grep gerritforge\n\nThis is wrong. Because the events-broker plugin is installed in \u003cgerrit_site\u003e/lib directory and the classes shouldn\u0027t be included. See for kafka-events plugin, that is handling events-broker correctly:\n\n  $ cd kafka-events\n  $ grep events-broker BUILD \n  \"@events-broker//jar:neverlink\",",
+      "parentUuid": "693dc20e_746dff31",
+      "revId": "4ba9c5c55ff481930da749f3fa0560bf47f622ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
