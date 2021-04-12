@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb618913_684a5af7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/AWSLogLevelModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-04-12T06:17:14Z",
+      "side": 1,
+      "message": "Maybe LifecycleListener would be better here",
+      "range": {
+        "startLine": 23,
+        "startChar": 39,
+        "endLine": 23,
+        "endChar": 53
+      },
+      "revId": "e600805abe8fc9b388c1283be3da9049a278687f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c463e5_bfbc2c08",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisConfigurationTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1005270
+      },
+      "writtenOn": "2021-04-12T06:17:14Z",
+      "side": 1,
+      "message": "This code can go to the setup method to avoid code duplication",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 71
+      },
+      "revId": "e600805abe8fc9b388c1283be3da9049a278687f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
