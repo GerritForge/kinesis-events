@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e992aa00_683626fd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisConsumer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000177
+      },
+      "writtenOn": "2021-04-12T09:09:55Z",
+      "side": 1,
+      "message": "It\u0027s actually repetition, should there be a constant?",
+      "range": {
+        "startLine": 88,
+        "startChar": 33,
+        "endLine": 88,
+        "endChar": 35
+      },
+      "revId": "23ef3ad6df05360a70ab7492bcc81daa72d0e5ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
