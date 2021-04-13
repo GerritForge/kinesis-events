@@ -18,7 +18,7 @@ import static com.google.inject.Scopes.SINGLETON;
 
 import com.amazonaws.services.kinesis.producer.KinesisProducer;
 import com.gerritforge.gerrit.eventbroker.BrokerApi;
-import com.gerritforge.gerrit.eventbroker.EventGsonProvider;
+import com.google.gerrit.server.events.EventGsonProvider;
 import com.gerritforge.gerrit.eventbroker.TopicSubscriber;
 import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.LifecycleListener;
