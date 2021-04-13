@@ -91,6 +91,11 @@ The kinesis-events plugin is configured by adding a plugin stanza in the
   Default: WARN
   Allowed values:OFF|FATAL|ERROR|WARN|INFO|DEBUG|TRACE|ALL
 
+`plugin.kinesis-events.streamEventsTopic`
+:   Optional. Name of the kinesis topic for stream events. kinesis-events plugin
+    exposes all stream events under this topic name.
+    Default: gerrit
+
 Overrides
 =========================
 
