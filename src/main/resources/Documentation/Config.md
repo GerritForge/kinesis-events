@@ -16,7 +16,7 @@ The kinesis-events plugin is configured by adding a plugin stanza in the
 ```
 
 `plugin.kinesis-events.numberOfSubscribers`
-:   The number of expected kinesis subscribers. This will be used to allocate
+:   Optional. The number of expected kinesis subscribers. This will be used to allocate
     a thread pool able to run all subscribers.
     Default: 6
 
