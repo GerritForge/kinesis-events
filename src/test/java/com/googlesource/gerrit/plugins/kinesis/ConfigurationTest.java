@@ -70,4 +70,25 @@ public class ConfigurationTest {
 
     assertThat(configuration.getAwsLibLogLevel()).isEqualTo(Level.WARN);
   }
+
+  @Test
+  public void shouldDefaultToAsynchronousPublishing() {
+    when(pluginConfigFactoryMock.getFromGerritConfig(PLUGIN_NAME))
+        .thenReturn(pluginConfig.asPluginConfig());
+
+    Configuration configuration = new Configuration(pluginConfigFactoryMock, PLUGIN_NAME);
+
+    assertThat(configuration.isSendAsync()).isEqualTo(true);
+  }
+
+  @Test
+  public void shouldConfigureSynchronousPublishing() {
+    pluginConfig.setBoolean("sendAsync", false);
+    when(pluginConfigFactoryMock.getFromGerritConfig(PLUGIN_NAME))
+        .thenReturn(pluginConfig.asPluginConfig());
+
+    Configuration configuration = new Configuration(pluginConfigFactoryMock, PLUGIN_NAME);
+
+    assertThat(configuration.isSendAsync()).isEqualTo(false);
+  }
 }

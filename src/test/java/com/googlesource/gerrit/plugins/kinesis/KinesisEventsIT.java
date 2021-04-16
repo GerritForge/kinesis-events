@@ -144,7 +144,8 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
   @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
   @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
   @GerritConfig(name = "plugin.kinesis-events.publishTimeoutMs", value = "10000")
-  public void shouldRetryUntilSuccessful() {
+  @GerritConfig(name = "plugin.kinesis-events.sendAsync", value = "false")
+  public void sendingSynchronouslyShouldRetryUntilSuccessful() {
     String streamName = UUID.randomUUID().toString();
     createStreamAsync(streamName);
 
@@ -156,11 +157,36 @@ public class KinesisEventsIT extends LightweightPluginDaemonTest {
   @Test
   @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
   @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
-  public void shouldBeUnsuccessfulWhenTimingOut() {
+  @GerritConfig(name = "plugin.kinesis-events.sendAsync", value = "false")
+  public void sendingSynchronouslyShouldBeUnsuccessfulWhenTimingOut() {
     String streamName = "not-existing-stream";
 
     PublishResult publishResult = kinesisBroker().sendWithResult(streamName, eventMessage());
     assertThat(publishResult.isSuccess()).isFalse();
+  }
+
+  @Test
+  @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
+  @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
+  @GerritConfig(name = "plugin.kinesis-events.sendAsync", value = "true")
+  public void sendingAsynchronouslyShouldBeImmediatelySuccessfulEvenWhenStreamDoesNotExist() {
+    String streamName = "not-existing-stream";
+
+    PublishResult publishResult = kinesisBroker().sendWithResult(streamName, eventMessage());
+    assertThat(publishResult.isSuccess()).isTrue();
+  }
+
+  @Test
+  @GerritConfig(name = "plugin.kinesis-events.applicationName", value = "test-consumer")
+  @GerritConfig(name = "plugin.kinesis-events.initialPosition", value = "trim_horizon")
+  @GerritConfig(name = "plugin.kinesis-events.sendAsync", value = "true")
+  public void sendingAsynchronouslyShouldBeImmediatelySuccessful() {
+    String streamName = UUID.randomUUID().toString();
+    createStreamAsync(streamName);
+
+    PublishResult publishResult = kinesisBroker().sendWithResult(streamName, eventMessage());
+    assertThat(publishResult.isSuccess()).isTrue();
+    assertThat(publishResult.attempts()).isEqualTo(1);
   }
 
   public KinesisBrokerApi kinesisBroker() {

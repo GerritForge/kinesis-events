@@ -96,6 +96,15 @@ The kinesis-events plugin is configured by adding a plugin stanza in the
     exposes all stream events under this topic name.
     Default: gerrit
 
+`plugin.kinesis-events.sendAsync`
+:   Optional. Whether to send messages to Kinesis asynchronously, without
+    waiting for the result of the operation.
+    Note that in this case, retries will still be attempted by the producer, but
+    in a separate thread, so that Gerrit will not be blocked waiting for the
+    publishing to terminate.
+    The overall result of the operation, once available, will be logged.
+    Default: true
+
 Overrides
 =========================
 

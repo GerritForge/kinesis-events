@@ -18,13 +18,13 @@ import static com.google.inject.Scopes.SINGLETON;
 
 import com.amazonaws.services.kinesis.producer.KinesisProducer;
 import com.gerritforge.gerrit.eventbroker.BrokerApi;
-import com.google.gerrit.server.events.EventGsonProvider;
 import com.gerritforge.gerrit.eventbroker.TopicSubscriber;
 import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.lifecycle.LifecycleModule;
+import com.google.gerrit.server.events.EventGsonProvider;
 import com.google.gerrit.server.events.EventListener;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
@@ -64,6 +64,10 @@ public class Module extends LifecycleModule {
     bind(ExecutorService.class)
         .annotatedWith(ConsumerExecutor.class)
         .toProvider(ConsumerExecutorProvider.class)
+        .in(SINGLETON);
+    bind(ExecutorService.class)
+        .annotatedWith(ProducerCallbackExecutor.class)
+        .toProvider(ProducerCallbackExecutorProvider.class)
         .in(SINGLETON);
     bind(KinesisProducer.class).toProvider(KinesisProducerProvider.class).in(Scopes.SINGLETON);
     bind(KinesisAsyncClient.class).toProvider(KinesisAsyncClientProvider.class).in(SINGLETON);
