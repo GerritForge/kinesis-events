@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f93e141_71913f11",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-16T17:49:40Z",
+      "side": 1,
+      "message": "Question for a follow up ticket...do we publish any metric in this library? If not it might be useful adding them, maybe it was already planned.",
+      "range": {
+        "startLine": 147,
+        "startChar": 24,
+        "endLine": 147,
+        "endChar": 33
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c8d335_610bce31",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/ProducerCallbackExecutorProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-16T17:49:40Z",
+      "side": 1,
+      "message": "Is there any scenario where it could make sense to have more than one? nit: Can we maybe add a comment on why we picked 1?",
+      "range": {
+        "startLine": 29,
+        "startChar": 12,
+        "endLine": 29,
+        "endChar": 13
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b753e9_bb4fb3f7",
+        "filename": "src/main/resources/Documentation/Config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-16T17:49:40Z",
+      "side": 1,
+      "message": "might be worth mentioning the metric will be skewed as we did for the GCloud equivalent: https://github.com/GerritForge/gcloud-pubsub-events/blob/master/src/main/resources/Documentation/config.md",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 32
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ff0bd5c_3ec06a67",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-16T17:49:40Z",
+      "side": 1,
+      "message": "Would it make sense to test the case of a Failure as well, for example injecting a mocked ExecutorService? Or do you think is too much trouble for little benefit?",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 190,
+        "endChar": 3
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
