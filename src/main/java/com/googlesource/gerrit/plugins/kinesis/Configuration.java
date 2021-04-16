@@ -39,6 +39,7 @@ class Configuration {
   private static final Long DEFAULT_PUBLISH_TIMEOUT_MS = 6000L;
   private static final Long DEFAULT_SHUTDOWN_TIMEOUT_MS = 20000L;
   private static final Level DEFAULT_AWS_LIB_LOG_LEVEL = Level.WARN;
+  private static final Boolean DEFAULT_SEND_ASYNC = true;
 
   private final String applicationName;
   private final String streamEventsTopic;
@@ -52,6 +53,7 @@ class Configuration {
   private final Long publishSingleRequestTimeoutMs;
   private final Long shutdownTimeoutMs;
   private final Level awsLibLogLevel;
+  private final Boolean sendAsync;
 
   @Inject
   public Configuration(PluginConfigFactory configFactory, @PluginName String pluginName) {
@@ -100,6 +102,11 @@ class Configuration {
         Optional.ofNullable(getStringParam(pluginConfig, "awsLibLogLevel", null))
             .map(l -> Level.toLevel(l, DEFAULT_AWS_LIB_LOG_LEVEL))
             .orElse(DEFAULT_AWS_LIB_LOG_LEVEL);
+
+    this.sendAsync =
+        Optional.ofNullable(getStringParam(pluginConfig, "sendAsync", null))
+            .map(Boolean::new)
+            .orElse(DEFAULT_SEND_ASYNC);
 
     logger.atInfo().log(
         "Kinesis client. Application:'%s'|PollingInterval: %s|maxRecords: %s%s%s",
@@ -167,5 +174,9 @@ class Configuration {
 
   public Level getAwsLibLogLevel() {
     return awsLibLogLevel;
+  }
+
+  public Boolean isSendAsync() {
+    return sendAsync;
   }
 }

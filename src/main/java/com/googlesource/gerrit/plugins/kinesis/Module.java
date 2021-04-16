@@ -65,6 +65,10 @@ public class Module extends LifecycleModule {
         .annotatedWith(ConsumerExecutor.class)
         .toProvider(ConsumerExecutorProvider.class)
         .in(SINGLETON);
+    bind(ExecutorService.class)
+        .annotatedWith(ProducerCallbackExecutor.class)
+        .toProvider(ProducerCallbackExecutorProvider.class)
+        .in(SINGLETON);
     bind(KinesisProducer.class).toProvider(KinesisProducerProvider.class).in(Scopes.SINGLETON);
     bind(KinesisAsyncClient.class).toProvider(KinesisAsyncClientProvider.class).in(SINGLETON);
     bind(DynamoDbAsyncClient.class).toProvider(DynamoDbAsyncClientProvider.class).in(SINGLETON);
