@@ -26,6 +26,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1834b527_fca73e3f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-04-17T02:33:19Z",
+      "side": 1,
+      "message": "Add a TODO here: we should in theory refactor this and return a Future\u003cPublishResult\u003e",
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83c8d335_610bce31",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/ProducerCallbackExecutorProvider.java",
         "patchSetId": 1
