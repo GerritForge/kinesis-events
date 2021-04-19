@@ -48,6 +48,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75e79dd3_b3c35232",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-19T11:34:53Z",
+      "side": 1,
+      "message": "Fair enough. I didn\u0027t think about the default metrics published to CW. If we will need some more custom metrics, strictly related to multi-site, we can add them later on.",
+      "parentUuid": "0ae5f744_430ca70d",
+      "range": {
+        "startLine": 147,
+        "startChar": 24,
+        "endLine": 147,
+        "endChar": 33
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1834b527_fca73e3f",
@@ -132,6 +156,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ca5580a_97d468bc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/ProducerCallbackExecutorProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-19T11:34:53Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to make it configurable unless necessary.\n\nI was just thinking in a comment explaining why we choose 1, i.e.: what you just said: \"We use 1 thread only when publishing, so it makes sense to have the same when processing the related callbacks\"",
+      "parentUuid": "c6e759e1_6988b9cc",
+      "range": {
+        "startLine": 29,
+        "startChar": 12,
+        "endLine": 29,
+        "endChar": 13
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8b753e9_bb4fb3f7",
         "filename": "src/main/resources/Documentation/Config.md",
         "patchSetId": 1
@@ -167,6 +215,30 @@
       "side": 1,
       "message": "I would like to avoid documenting this, since that is a bug that we should fix (in fact it\u0027s in progress right now).\n\nIf we documented it then we should immediately un-document it when that is done.\n\nWDYT?",
       "parentUuid": "e8b753e9_bb4fb3f7",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 32
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6f43fd_50b349fa",
+        "filename": "src/main/resources/Documentation/Config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-19T11:34:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7e5d4827_601fdec6",
       "range": {
         "startLine": 99,
         "startChar": 1,
@@ -214,6 +286,30 @@
       "side": 1,
       "message": "Injecting a mocked Executor service would not cause a failure.\nThe executor service is to process the callback of the publishing, not the publishing itself.\n\nWe cannot test it by invoking the BrokerAPI.send() method directly (because we would need to bind, *only for this test*, an instance of KPL that would cause a failure).\n\nWe could wrap KPL and use the KinesisPublisher and an entry point for our test:\n\nkinesisPublisher(..., mockedKinesisProducer).sendAsync()\n\nHowever, KPL doesn\u0027t play well with Mockito:\n\n```\nMockito cannot mock this class: class com.amazonaws.services.kinesis.producer.KinesisProducer\n```\n\nWe could wrap KinesisProducer into its own class and then mock that one instead, but I think it would be too much of an overhead for adding this one test.\n\nWDYT?",
       "parentUuid": "8ff0bd5c_3ec06a67",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 190,
+        "endChar": 3
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee757abe_517844bf",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1012541
+      },
+      "writtenOn": "2021-04-19T11:34:53Z",
+      "side": 1,
+      "message": "Yep, I agree it doesn\u0027t make sense. We would probably end up with a more complex code for little benefit.",
+      "parentUuid": "14a39948_6e99439c",
       "range": {
         "startLine": 190,
         "startChar": 2,
