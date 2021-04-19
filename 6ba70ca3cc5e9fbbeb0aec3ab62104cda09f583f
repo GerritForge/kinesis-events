@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ae5f744_430ca70d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-19T10:18:21Z",
+      "side": 1,
+      "message": "we don\u0027t publish gerrit metrics yet.\nthe KCL and KPC library already publish to CW out of the box, so we already know successes/failures and loads of other things.\n\nmulti-site is also already publishing metrics regarding success/failures to gerrit metric registry.\n\nLet\u0027s discuss whether there\u0027s value in adding some extra metrics and let\u0027s do it as a follow up change.\n\nWDYT?",
+      "parentUuid": "2f93e141_71913f11",
+      "range": {
+        "startLine": 147,
+        "startChar": 24,
+        "endLine": 147,
+        "endChar": 33
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1834b527_fca73e3f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
         "patchSetId": 1
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0602c63_f36477b8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisPublisher.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-19T10:18:21Z",
+      "side": 1,
+      "message": "I don\u0027t understand how we could return a Future here.\n\nThe BrokerAPI.send() method does not support asynchronous executions, it requires to know immediately if the publishing was a success or a failure[1].\n\nThis is fine when publishing synchronously, because we know whether the publishing succeeded or failed and we can report this result up to the stack to the BrokerAPI.send().\n\nWhen publishing asynchronously however, we *don\u0027t* know whether the publishing succeeded or failed, we only know whether the publishing has been successfully/unsuccessfully *queued* for execution.\nSo that\u0027s what we report to the BrokerAPI.send() and hence the signature of this method.\n\nBrokerAPI.send()\u0027s result changes its semantics from \"successfully published\" to \"successfully queued for publishing\".\n\nIf we were to return a Future\u003cPublishResult\u003e here, it would need to be an immediately resolved future, because BrokerAPI.send(), simply cannot wait for the future to be resolved, as its signature does not allow it.\n\nDid you mean to return an immediately resolved future here? if so what would be the benefit? \n\n[1]https://gerrit.googlesource.com/modules/events-broker/+/refs/heads/stable-3.4/src/main/java/com/gerritforge/gerrit/eventbroker/BrokerApi.java#45",
+      "parentUuid": "1834b527_fca73e3f",
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83c8d335_610bce31",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/ProducerCallbackExecutorProvider.java",
         "patchSetId": 1
@@ -54,6 +96,30 @@
       "writtenOn": "2021-04-16T17:49:40Z",
       "side": 1,
       "message": "Is there any scenario where it could make sense to have more than one? nit: Can we maybe add a comment on why we picked 1?",
+      "range": {
+        "startLine": 29,
+        "startChar": 12,
+        "endLine": 29,
+        "endChar": 13
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e759e1_6988b9cc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/kinesis/ProducerCallbackExecutorProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-19T10:18:21Z",
+      "side": 1,
+      "message": "We use 1 thread only when publishing[1], so I thought it makes sense to have the same when processing the related callbacks.\n\nThe callbacks are just logging, so it is not a computationally intensive task and I don\u0027t think more than one thread should be dedicated to it.\n\nI did run gatling in the past against it though and I didn\u0027t see any message that was not delivered immediately.\n\nWe could introduce a numberOfPublishThreads configuration and default to 1, if we think this number would be too restrictive.\n\nWDYT?\n\n[1]https://review.gerrithub.io/plugins/gitiles/GerritForge/kinesis-events/+/6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f/src/main/java/com/googlesource/gerrit/plugins/kinesis/KinesisProducerProvider.java#39",
+      "parentUuid": "83c8d335_610bce31",
       "range": {
         "startLine": 29,
         "startChar": 12,
@@ -89,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e5d4827_601fdec6",
+        "filename": "src/main/resources/Documentation/Config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-19T10:18:21Z",
+      "side": 1,
+      "message": "I would like to avoid documenting this, since that is a bug that we should fix (in fact it\u0027s in progress right now).\n\nIf we documented it then we should immediately un-document it when that is done.\n\nWDYT?",
+      "parentUuid": "e8b753e9_bb4fb3f7",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 32
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ff0bd5c_3ec06a67",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
         "patchSetId": 1
@@ -100,6 +190,30 @@
       "writtenOn": "2021-04-16T17:49:40Z",
       "side": 1,
       "message": "Would it make sense to test the case of a Failure as well, for example injecting a mocked ExecutorService? Or do you think is too much trouble for little benefit?",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 190,
+        "endChar": 3
+      },
+      "revId": "6ba70ca3cc5e9fbbeb0aec3ab62104cda09f583f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14a39948_6e99439c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/kinesis/KinesisEventsIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1015244
+      },
+      "writtenOn": "2021-04-19T10:18:21Z",
+      "side": 1,
+      "message": "Injecting a mocked Executor service would not cause a failure.\nThe executor service is to process the callback of the publishing, not the publishing itself.\n\nWe cannot test it by invoking the BrokerAPI.send() method directly (because we would need to bind, *only for this test*, an instance of KPL that would cause a failure).\n\nWe could wrap KPL and use the KinesisPublisher and an entry point for our test:\n\nkinesisPublisher(..., mockedKinesisProducer).sendAsync()\n\nHowever, KPL doesn\u0027t play well with Mockito:\n\n```\nMockito cannot mock this class: class com.amazonaws.services.kinesis.producer.KinesisProducer\n```\n\nWe could wrap KinesisProducer into its own class and then mock that one instead, but I think it would be too much of an overhead for adding this one test.\n\nWDYT?",
+      "parentUuid": "8ff0bd5c_3ec06a67",
       "range": {
         "startLine": 190,
         "startChar": 2,
