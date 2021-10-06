@@ -11,12 +11,13 @@ match the kinesis-events plugin one.
 git clone --recursive https://gerrit.googlesource.com/gerrit
 cd gerrit
 git clone "https://review.gerrithub.io/GerritForge/kinesis-events" plugins/kinesis-events
-ln -sf plugins/kinesis-events/external_plugin_deps.bzl plugins/.
+cd plugins 
+ln -sf kinesis-events/external_plugin_deps.bzl plugins/.
 bazelisk build plugins/kinesis-events
 ```
 
-The output is created in
+The output is created in the gerrit 
 
 ```
-bazel-genfiles/plugins/kinesis-events/kinesis-events.jar
+gerrit/bazel-bin/plugins/kinesis-events/kinesis-events.jar
 ```
